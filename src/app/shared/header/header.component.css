@@ -1,0 +1,42 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: var(--color-background);
+}
+
+.logo {
+  min-width: 211px;
+  height: 30px;
+  top: 5px;
+  background-image: url('../../../assets/images/mercadona.svg');
+}
+
+.search-bar {
+  width: 100%;
+  padding-left: 2rem;
+}
+
+.search-bar input {
+  padding: 5px;
+  width: 100%;
+  border-radius: 1rem;
+}
+
+.category-button,
+.login-button,
+.cart-button {
+  margin-left: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .category-button,
+  .login-button,
+  .cart-button,
+  .login-and-cart {
+    display: none;
+  }
+  .search-bar {
+    padding-left: 0rem;
+  }
+}
