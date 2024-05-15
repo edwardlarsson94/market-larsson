@@ -3,6 +3,7 @@
   justify-content: space-between;
   padding: 10px;
   background-color: var(--color-background);
+  border-bottom: .5px solid var(--color-border-bottom);
 }
 
 .logo {
@@ -25,8 +26,7 @@
 }
 
 .category-button,
-.login-button,
-.cart-button {
+.login-button {
   margin-left: 20px;
 }
 
