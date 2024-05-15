@@ -14,10 +14,11 @@
 
 .search-bar {
   width: 100%;
+  min-width: 260px;
   padding-left: 2rem;
 }
 
-.search-bar input {
+.search-bar-input {
   padding: 5px;
   width: 100%;
   border-radius: 1rem;
@@ -29,6 +30,16 @@
   margin-left: 20px;
 }
 
+.logo-search-and-category {
+  display: flex;
+  align-items: center;
+}
+
+.login-and-cart {
+  display: flex;
+  align-items: center;
+}
+
 @media screen and (max-width: 768px) {
   .category-button,
   .login-button,
@@ -36,7 +47,7 @@
   .login-and-cart {
     display: none;
   }
-  .search-bar {
-    padding-left: 0rem;
+  .logo-search-and-category {
+    width: 100%;
   }
 }
