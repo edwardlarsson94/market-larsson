@@ -1,1 +1,19 @@
-<p>cards works!</p>
+<nz-card nzHoverable style="width: 240px" [nzCover]="coverTemplate">
+<nz-card-meta
+    nzTitle="Hacendado milk filled cereals"
+    nzDescription="Box 500g"
+></nz-card-meta>
+<div class="box-title-price-unid">
+    <h2 class="title-price">2,50 $</h2>
+    <p class="title-unit">/ud.</p>
+</div>
+<button class="button-add-cart" nz-button nzType="primary" [nzSize]="size" nzShape="round">
+    Add to cart
+</button>
+</nz-card>
+<ng-template #coverTemplate>
+<img
+    alt="cereal"
+    src="../../../../assets/images/products/cereal.jpg"
+/>
+</ng-template>
