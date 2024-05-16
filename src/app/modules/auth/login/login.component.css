@@ -1,4 +1,36 @@
+::ng-deep .title-modal-login .ant-modal-title {
+    font-size: 18px;
+    font-weight: 700;
+}
+.box-img-form-login{
+    display: flex;
+}
 .box-img-login img{
-    width: 480px;
-    height: 618px;
+    width: 290px;
+    height: 374px;
+}
+.box-form-login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 1.5rem;
+}
+.box-img-logo{
+    padding-bottom: 2rem;
+}
+.box-img-logo img{
+    width: 140px;
+}
+.login-form-button{
+    background-color: var(--color-button-green-confirm);
+    border-color: var(--color-button-green-confirm);
+}
+.text-register-now{
+    color:var(--color-button-green-confirm);
+}
+.box-footer-login{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 3rem;
 }

@@ -1,15 +1,21 @@
 <button nz-button (click)="showModal()" nzType="text"><span>Login</span></button>
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Login" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+<nz-modal nzClassName="title-modal-login" [(nzVisible)]="isVisible" nzTitle="Welcome, please login or register." (nzOnCancel)="handleCancel()" [nzFooter]="modalFooter">
     <ng-container *nzModalContent>
-        <div>
+        <div class="box-img-form-login">
             <div class="box-img-login">
                 <img
                     alt="login"
                     src="../../../../assets/images/login/login.jpg"
                 />
             </div>
-            <div>
+            <div class="box-form-login">
+                <div class="box-img-logo">
+                  <img
+                      alt="logo"
+                      src="../../../../assets/images/login/logo.svg"
+                  />
+                </div>
                 <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
                     <nz-form-item>
                       <nz-form-control nzErrorTip="Please input your username!">
@@ -25,21 +31,12 @@
                         </nz-input-group>
                       </nz-form-control>
                     </nz-form-item>
-                    <div nz-row class="login-form-margin">
-                      <div nz-col [nzSpan]="12">
-                        <input id="remember" type="checkbox" formControlName="remember"> 
-                        <label htmlFor="btn-check5" nz-checkbox for="remember">
-                          <span>Remember me</span>
-                        </label>
-                      </div>
-                      <div nz-col [nzSpan]="12">
-                        <a class="login-form-forgot">Forgot password</a>
-                      </div>
+                    <div class="box-footer-login">
+                      <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
+                      Or
+                      <a class="text-register-now">Register now!</a>
                     </div>
-                    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
-                    Or
-                    <a>register now!</a>
-                  </form>
+                </form>
             </div>
         </div>
     </ng-container>

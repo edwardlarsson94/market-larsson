@@ -18,6 +18,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 })
 export class LoginComponent {
   isVisible = false;
+  modalFooter = null;
 
   showModal(): void {
     this.isVisible = true;
