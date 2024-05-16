@@ -1,0 +1,20 @@
+<button class="cart-button" (click)="open()">
+    <fa-icon [icon]="faCartShopping"></fa-icon>
+</button>
+<div>
+
+  <nz-drawer
+    [nzClosable]="false"
+    [nzVisible]="visible"
+    nzPlacement="right"
+    nzTitle="Basic Drawer"
+    (nzOnClose)="close()"
+    nzNoAnimation="true"
+  >
+  <ng-container *nzDrawerContent>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+    </ng-container>
+  </nz-drawer> 
+</div>

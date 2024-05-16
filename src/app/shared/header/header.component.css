@@ -40,10 +40,15 @@
   align-items: center;
 }
 
+.cart-button{
+  background-color: transparent;
+  border-color: transparent;
+}
+
 @media screen and (max-width: 768px) {
   .category-button,
   .login-button,
-  .cart-button,
+  .box-cart-button,
   .login-and-cart {
     display: none;
   }

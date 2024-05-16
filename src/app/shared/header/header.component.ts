@@ -4,9 +4,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { LoginComponent } from '../../modules/auth/login/login.component';
+import { DrawerComponent } from '../../modules/cart/drawer/drawer.component';
 export interface AutocompleteOptionGroups {
   title: string;
   count?: number;
@@ -23,8 +22,8 @@ export interface AutocompleteOptionGroups {
     NzAutocompleteModule,
     NzIconModule,
     NzInputModule,
-    FontAwesomeModule,
-    LoginComponent
+    LoginComponent,
+    DrawerComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
@@ -32,7 +31,6 @@ export interface AutocompleteOptionGroups {
 export class HeaderComponent {
   inputValue?: string;
   optionGroups: AutocompleteOptionGroups[] = [];
-  faCartShopping = faCartShopping;
 
   constructor() {}
 
