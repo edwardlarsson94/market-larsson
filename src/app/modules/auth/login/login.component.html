@@ -1,9 +1,46 @@
 <button nz-button (click)="showModal()" nzType="text"><span>Login</span></button>
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Login" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
     <ng-container *nzModalContent>
-    <p>Content one</p>
-    <p>Content two</p>
-    <p>Content three</p>
+        <div>
+            <div class="box-img-login">
+                <img
+                    alt="login"
+                    src="../../../../assets/images/login/login.jpg"
+                />
+            </div>
+            <div>
+                <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+                    <nz-form-item>
+                      <nz-form-control nzErrorTip="Please input your username!">
+                        <nz-input-group nzPrefixIcon="user">
+                          <input type="text" nz-input formControlName="userName" placeholder="Username" />
+                        </nz-input-group>
+                      </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                      <nz-form-control nzErrorTip="Please input your Password!">
+                        <nz-input-group nzPrefixIcon="lock">
+                          <input type="password" nz-input formControlName="password" placeholder="Password" />
+                        </nz-input-group>
+                      </nz-form-control>
+                    </nz-form-item>
+                    <div nz-row class="login-form-margin">
+                      <div nz-col [nzSpan]="12">
+                        <input id="remember" type="checkbox" formControlName="remember"> 
+                        <label htmlFor="btn-check5" nz-checkbox for="remember">
+                          <span>Remember me</span>
+                        </label>
+                      </div>
+                      <div nz-col [nzSpan]="12">
+                        <a class="login-form-forgot">Forgot password</a>
+                      </div>
+                    </div>
+                    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
+                    Or
+                    <a>register now!</a>
+                  </form>
+            </div>
+        </div>
     </ng-container>
 </nz-modal>
