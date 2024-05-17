@@ -1,0 +1,26 @@
+::ng-deep .title-modal-cart .ant-drawer-title {
+    font-size: 18px;
+    font-weight: 700;
+}
+.box-cart-empty{
+    display: flex;
+}
+.cart-button-empty{
+    padding: 0;
+}
+.box-total-approximate{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.text-total-approximate{
+    margin-top: 4px;
+}
+.price-total-approximate{
+    font-weight: 800;
+}
+.button-footer-cart{
+    background-color: var(--color-button-green-confirm);
+    border-color: var(--color-button-green-confirm);
+    width: 100%;
+}

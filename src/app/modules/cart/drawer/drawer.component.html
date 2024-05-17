@@ -4,17 +4,65 @@
 <div>
 
   <nz-drawer
-    [nzClosable]="false"
+    [nzClosable]="true"
     [nzVisible]="visible"
     nzPlacement="right"
-    nzTitle="Basic Drawer"
+    nzTitle="Cart"
     (nzOnClose)="close()"
     nzNoAnimation="true"
+    nzWrapClassName="title-modal-cart"
+    [nzExtra]="extraTemplate"
+    [nzFooter]="footerTemplate"
   >
   <ng-container *nzDrawerContent>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
+      <app-cards/>
     </ng-container>
   </nz-drawer> 
 </div>
+
+
+<ng-template #extraTemplate>
+  <div class="box-cart-empty">
+    <div>
+      <button class="cart-button-empty" nz-button nzType="text">Empty</button>
+    </div>
+    <button class="cart-button">
+      <fa-icon [icon]="faTrashCan"></fa-icon>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #footerTemplate>
+  <div class="box-footer-cart">
+    <div class="box-total-approximate">
+      <p class="text-total-approximate">Approximate Total</p>
+      <h3 class="price-total-approximate">57,80 $</h3>
+    </div>
+    <div>
+      <button nz-button class="button-footer-cart" [nzType]="'primary'">Place an order</button>
+    </div>
+  </div>
+</ng-template>
