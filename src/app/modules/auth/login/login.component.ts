@@ -1,8 +1,9 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { FormControl, FormGroup, NonNullableFormBuilder, Validators,  ReactiveFormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormControl, FormGroup, NonNullableFormBuilder, Validators,  ReactiveFormsModule } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
     NzModalModule,
     NzButtonModule,
     NzFormModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RegisterComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'

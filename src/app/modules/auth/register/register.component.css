@@ -1,0 +1,34 @@
+.box-email-register, 
+.box-password-register, 
+.box-confirm-register,
+.box-phone-register{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.box-email-register nz-form-label,
+.box-password-register nz-form-label,
+.box-confirm-register nz-form-label,
+.box-phone-register nz-form-label
+{
+    text-align: justify;
+}
+
+.box-register-button{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 3rem;
+}
+.register-form-button{
+    background-color: var(--color-button-green-confirm);
+    border-color: var(--color-button-green-confirm);
+    width: 100%;
+}
+.register-area{
+    margin: 0;
+}
+.label-register-all{
+    margin-top: 1rem;
+}
