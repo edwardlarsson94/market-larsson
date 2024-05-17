@@ -4,7 +4,6 @@ import { faMinus, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 
-
 @Component({
   selector: 'app-cards',
   standalone: true,
