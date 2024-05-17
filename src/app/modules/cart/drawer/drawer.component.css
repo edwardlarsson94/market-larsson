@@ -2,6 +2,9 @@
     font-size: 18px;
     font-weight: 700;
 }
+::ng-deep .ant-drawer-body{
+    padding: 0;
+}
 .box-cart-empty{
     display: flex;
 }
