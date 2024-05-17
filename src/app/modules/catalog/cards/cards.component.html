@@ -7,13 +7,34 @@
     <h2 class="title-price">2,50 $</h2>
     <p class="title-unit">/ud.</p>
 </div>
-<button class="button-add-cart" nz-button nzType="primary" [nzSize]="size" nzShape="round">
+<!-- <button class="button-add-cart" nz-button nzType="primary" [nzSize]="size" nzShape="round">
     Add to cart
-</button>
+</button> -->
+
+<div class="box-cards-footer">
+    <div>
+        <p class="title-buttons-cars">In Car</p>
+        <p class="box-carts-ud">1 ud.</p>
+    </div>
+    <div class="button-price-carts">
+        <button class="delete-carts-button">
+            <fa-icon [icon]="faTrash"></fa-icon>
+        </button>
+        <!-- <button class="minus-cart-button add-cart-button">
+            <fa-icon [icon]="faMinus"></fa-icon>
+        </button> -->
+        <button class="add-carts-button">
+            <fa-icon [icon]="faPlus"></fa-icon>
+        </button>
+    </div>
+</div>
+
 </nz-card>
 <ng-template #coverTemplate>
-<img
-    alt="cereal"
-    src="../../../../assets/images/products/cereal.jpg"
-/>
+<div class="box-img-cards">
+    <img
+        alt="cereal"
+        src="../../../../assets/images/products/cereal.jpg"
+    />
+</div>
 </ng-template>

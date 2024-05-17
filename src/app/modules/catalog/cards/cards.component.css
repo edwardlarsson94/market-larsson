@@ -1,3 +1,7 @@
+::ng-deep .ant-card-body{
+    padding: 0 16px;
+}
+
 .box-title-price-unid{
     display: flex;
     align-items: end;
@@ -14,4 +18,44 @@
     width: 100%;
     border: 1px solid var(--color-button-add-border);
     color: var(--color-button-add-text);
+    margin-bottom: 1rem;
+}
+.title-buttons-cars{
+    margin: 0;
+}
+.box-carts-ud{
+    font-weight: 900;
+}
+.button-price-carts{
+    display: flex;
+    height: 27px;
+}
+.delete-carts-button{
+    background-color: transparent;
+    border: 1px solid var(--color-button-add-border);
+    border-radius: 14px;
+    margin-right: 10px;
+}
+.add-carts-button{
+    background-color: var(--color-button-add-border);
+    border: 1px solid var(--color-button-add-border);
+    border-radius: 14px;
+}
+.box-cards-footer{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    border-top: 1px solid var(--color-border-bottom);
+    padding-top: 10px;
+    align-items: center;
+}
+.box-img-cards{
+    display: flex;
+    justify-content: center;
+}
+.box-img-cards img{
+    display: flex;
+    justify-content: center;
+    width: 192px;
+    padding: 1px;
 }
