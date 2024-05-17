@@ -11,6 +11,26 @@
 .cart-button-empty{
     padding: 0;
 }
+.cart-button-active{
+    background-color: var(--color-button-add-border);
+    border-color: var(--color-button-add-border);
+    border-radius: 8px;
+    display: flex;
+    height: 35px;
+    align-items: center;
+}
+.amount-product-cart{
+    background-color: var(--color-button-add-text);
+    border-radius: 16px;
+    width: 23px;
+    color: var(--color-background);
+    margin: 0 10px;
+    font-weight: 500;
+}
+.price-product-cart{
+    color: var(--color-button-add-text);
+    font-weight: 500;
+}
 .box-total-approximate{
     display: flex;
     align-items: center;

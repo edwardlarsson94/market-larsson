@@ -4,6 +4,9 @@ import { faCartShopping, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardsComponent } from '../cards/cards.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzModalService } from 'ng-zorro-antd/modal';
+
 
 @Component({
   selector: 'app-drawer',
@@ -12,12 +15,16 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzDrawerModule,
     FontAwesomeModule,
     CardsComponent,
-    NzButtonModule
+    NzButtonModule,
+    NzModalModule
   ],
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.css']
 })
 export class DrawerComponent {
+
+  constructor(private modal: NzModalService) {}
+
   faCartShopping = faCartShopping;
   faTrashCan = faTrashCan
   visible = false;
@@ -29,4 +36,18 @@ export class DrawerComponent {
   close(): void {
     this.visible = false;
   }
+
+  showDeleteConfirm(): void {
+    this.modal.confirm({
+      nzTitle: 'Empty shopping cart',
+      nzContent: '<b style="color: red;">Are you sure to empty the shopping cart?</b>',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => console.log('OK'),
+      nzCancelText: 'No',
+      nzOnCancel: () => console.log('Cancel')
+    });
+  }
+
 }

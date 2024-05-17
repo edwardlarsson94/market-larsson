@@ -1,6 +1,13 @@
-<button class="cart-button" (click)="open()">
+<!-- <button class="cart-button" (click)="open()">
     <fa-icon [icon]="faCartShopping"></fa-icon>
+</button> -->
+
+<button class="cart-button-active" (click)="open()">
+  <fa-icon [icon]="faCartShopping"></fa-icon>
+  <div class="amount-product-cart">10</div>
+  <div class="price-product-cart">200$</div>
 </button>
+
 <div>
 
   <nz-drawer
@@ -47,9 +54,9 @@
 <ng-template #extraTemplate>
   <div class="box-cart-empty">
     <div>
-      <button class="cart-button-empty" nz-button nzType="text">Empty</button>
+      <button class="cart-button-empty" nz-button nzType="text" (click)="showDeleteConfirm()">Empty</button>
     </div>
-    <button class="cart-button">
+    <button class="cart-button" (click)="showDeleteConfirm()">
       <fa-icon [icon]="faTrashCan"></fa-icon>
     </button>
   </div>
