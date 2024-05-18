@@ -4,7 +4,12 @@
 .box-phone-register{
     display: flex;
     flex-direction: column;
+}
 
+.box-password-register, 
+.box-confirm-register,
+.box-phone-register{
+    margin-top: 2rem;
 }
 
 .box-email-register nz-form-label,
@@ -19,16 +24,20 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    padding-top: 3rem;
+    padding-top: 1rem;
 }
 .register-form-button{
     background-color: var(--color-button-green-confirm);
     border-color: var(--color-button-green-confirm);
     width: 100%;
+    margin-top: 3rem;
 }
 .register-area{
     margin: 0;
 }
 .label-register-all{
     margin-top: 1rem;
+}
+.text-login-now{
+    color:var(--color-button-green-confirm);
 }

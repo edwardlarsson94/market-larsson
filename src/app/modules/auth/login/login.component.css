@@ -1,22 +1,25 @@
-::ng-deep .title-modal-login .ant-modal-title {
+::ng-deep .title-modal-login .ant-modal-title{
     font-size: 18px;
     font-weight: 700;
+}
+::ng-deep .cdk-drag .ant-modal .title-modal-login .cdk-drag-disabled{
+    width: 36rem;
 }
 .box-img-form-login{
     display: flex;
 }
 .box-img-login img{
-    width: 290px;
-    height: 374px;
+    width: 250px;
+    height: 380px;
 }
 .box-form-login{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 1.5rem;
+    padding-left: 1.5rem;
 }
 .box-img-logo{
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
 }
 .box-img-logo img{
     width: 140px;
@@ -33,4 +36,12 @@
     flex-direction: column;
     text-align: center;
     padding-top: 3rem;
+}
+@media screen and (max-width: 768px) {
+    ::ng-deep .ant-modal{
+        display: none;
+    }
+    ::ng-deep .cdk-overlay-container{
+        display: none;
+    }
 }

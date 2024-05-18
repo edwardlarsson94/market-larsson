@@ -1,7 +1,12 @@
 <button nz-button (click)="showModal()" nzType="text"><span>Login</span></button>
 
-<nz-modal nzClassName="title-modal-login" [(nzVisible)]="isVisible" nzTitle="Welcome, please login or register." (nzOnCancel)="handleCancel()" [nzFooter]="modalFooter">
-    <ng-container *nzModalContent>
+<nz-modal nzClassName="title-modal-login" 
+          [(nzVisible)]="isVisible" 
+          nzTitle="Welcome, please login or register." 
+          (nzOnCancel)="handleCancel()" 
+          [nzFooter]="modalFooter"
+>
+    <ng-container class="box-container-login" *nzModalContent>
         <div class="box-img-form-login">
             <div class="box-img-login">
                 <img

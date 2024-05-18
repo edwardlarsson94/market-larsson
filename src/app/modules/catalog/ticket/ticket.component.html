@@ -3,8 +3,54 @@
     <div nz-col [nzMd]="15" [nzLg]="18" class="box-ticket-delivery">
         <div class="box-summary-ticket only-style-delivery">
             <h2 class="title-ticket-order">Delivery</h2>
-            <div>
-                <span>Add where you want to receive your order.</span>
+            <span>Add where you want to receive your order.</span>
+            <div class="box-form-ticket">
+                <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+                    <nz-form-item>
+                      <nz-form-label [nzSpan]="7" nzRequired>Address</nz-form-label>
+                      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="addressErrorTpl">
+                        <input nz-input formControlName="address" placeholder="async validate try to write Colombia" />
+                        <ng-template #addressErrorTpl let-control>
+                          @if (control.errors?.['required']) {
+                            Please input your address!
+                          }
+                          @if (control.errors?.['duplicated']) {
+                            The address is redundant!
+                          }
+                        </ng-template>
+                      </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                      <nz-form-label [nzSpan]="7" nzRequired>E-mail</nz-form-label>
+                      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="emailErrorTpl">
+                        <input nz-input formControlName="email" placeholder="email" type="email" />
+                        <ng-template #emailErrorTpl let-control>
+                          @if (control.errors?.['email']) {
+                            The input is not valid E-mail!
+                          }
+                          @if (control.errors?.['required']) {
+                            Please input your E-mail!
+                          }
+                        </ng-template>
+                      </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                      <nz-form-label [nzSpan]="7" nzRequired>Comment</nz-form-label>
+                      <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please write something here!">
+                        <nz-textarea-count [nzMaxCharacterCount]="2000">
+                          <textarea formControlName="comment" nz-input rows="2" placeholder="write any thing"></textarea>
+                        </nz-textarea-count>
+                      </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                      <nz-form-control [nzOffset]="7" [nzSpan]="12">
+                        <div class="box-buttons-ticket">
+                            <button class="button-ticket-reset" nz-button (click)="resetForm($event)">Reset</button>
+                            <button class="button-ticket-confirm" nzType="primary" [disabled]="!validateForm.valid">Submit</button>
+                        </div>
+                      </nz-form-control>
+                    </nz-form-item>
+                </form>
             </div>
         </div>
     </div>
