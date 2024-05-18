@@ -1,6 +1,11 @@
 .box-icon-back{
     margin-right: 14px;
 }
+.box-button-back{
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0;
+}
 .banner {
     display: flex;
     justify-content: space-between;
