@@ -37,6 +37,10 @@
     text-align: center;
     padding-top: 3rem;
 }
+.button-register-now{
+    border: transparent;
+    background-color: transparent;
+}
 @media screen and (max-width: 768px) {
     ::ng-deep .ant-modal{
         display: none;

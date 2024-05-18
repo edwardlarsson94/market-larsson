@@ -41,3 +41,7 @@
 .text-login-now{
     color:var(--color-button-green-confirm);
 }
+.button-login-now{
+    border: transparent;
+    background-color: transparent;
+}

@@ -21,7 +21,7 @@
                       src="../../../../assets/images/login/logo.svg"
                   />
                 </div>
-                <!-- <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+                <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
                     <nz-form-item>
                       <nz-form-control nzErrorTip="Please input your username!">
                         <nz-input-group nzPrefixIcon="user">
@@ -39,10 +39,12 @@
                     <div class="box-footer-login">
                       <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
                       Or
-                      <a class="text-register-now">Register now!</a>
+                      <button class="button-register-now">
+                        <span class="text-register-now">Register now!</span>
+                      </button>
                     </div>
-                </form> -->
-                <app-register/>
+                </form>
+                <!-- <app-register/> -->
             </div>
         </div>
     </ng-container>
