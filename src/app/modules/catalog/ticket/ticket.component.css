@@ -1,0 +1,34 @@
+.box-ticket-order{
+   background-color: var(--color-background-secondary);
+   height: 100vh;
+   padding: 10px 30px;
+}
+.box-descriptions-ticket{
+    display: flex;
+    justify-content: space-between;
+}
+.title-ticket-order{
+    font-size: 1.375rem;
+    font-weight: 700;
+    line-height: 1.23;
+}
+
+.box-summary-ticket{
+    border-radius: 8px;
+    transition: box-shadow .1s linear;
+    padding: 24px;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border-bottom);
+    padding: 24px;
+}
+.only-style-right{
+    margin-left: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+    .box-ticket-order{
+        background-color: red;
+        height: 100vh;
+        padding: 10px 30px;
+     }
+  }

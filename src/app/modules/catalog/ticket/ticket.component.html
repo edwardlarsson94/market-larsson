@@ -1,2 +1,39 @@
 <app-banner/>
-<p>ticket works!</p>
+<div nz-row class="box-ticket-order">
+    <div nz-col [nzSpan]="6" [nzPush]="18">
+        <div class="box-summary-ticket only-style-right">
+            <h2 class="title-ticket-order">Summary</h2>
+            <div class="box-descriptions-ticket">
+                <span>Amount of products</span>
+                <span>52,70 $</span>
+            </div>
+            <div class="box-descriptions-ticket">
+                <span>Preparation</span>
+                <span>0,00 $</span>
+            </div>
+            <div class="box-descriptions-ticket">
+                <span>Total</span>
+                <span>52,70 $</span>
+            </div>
+            <div class="box-descriptions-ticket">
+                <span>TAX included</span>
+                <span>4,79 $</span>
+            </div>
+            <div>
+                <button>Buy</button>
+            </div>
+            <div>
+                <span>By authorizing payment, you accept our terms and conditions as well as our privacy policy.</span>
+            </div>
+        </div>
+    </div>
+    <div nz-col [nzSpan]="18" [nzPull]="6">
+        <div class="box-summary-ticket">
+            <h2 class="title-ticket-order">Delivery</h2>
+            <div>
+                <span>Add where you want to receive your order.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
