@@ -1,0 +1,20 @@
+.box-icon-back{
+    margin-right: 14px;
+}
+.banner {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 30px;
+    background-color: var(--color-background);
+    border-bottom: .5px solid var(--color-border-bottom);
+}
+.logo-banner-and-category {
+    display: flex;
+    align-items: center;
+}
+.logo {
+    width: 42px;
+    height: 42px;
+    background-image: url('../../../assets/images/banner/logo.svg');
+    background-size: cover;
+}

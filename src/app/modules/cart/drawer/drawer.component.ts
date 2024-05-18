@@ -5,9 +5,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardsComponent } from '../cards/cards.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzModalModule } from 'ng-zorro-antd/modal';
-import { NzModalService } from 'ng-zorro-antd/modal';
-
-
+import { NzModalService } from 'ng-zorro-antd/modal'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-drawer',
   standalone: true,
@@ -23,7 +22,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 })
 export class DrawerComponent {
 
-  constructor(private modal: NzModalService) {}
+  constructor(private modal: NzModalService,private router: Router) {}
 
   faCartShopping = faCartShopping;
   faTrashCan = faTrashCan
@@ -49,5 +48,10 @@ export class DrawerComponent {
       nzOnCancel: () => console.log('Cancel')
     });
   }
+
+  navigateToTickets() {
+    this.router.navigate(['/tickets']);
+  }
+
 
 }
