@@ -1,6 +1,14 @@
 <app-banner/>
 <div nz-row class="box-ticket-order">
-    <div nz-col [nzSpan]="6" [nzPush]="18">
+    <div nz-col [nzMd]="15" [nzLg]="18" class="box-ticket-delivery">
+        <div class="box-summary-ticket only-style-delivery">
+            <h2 class="title-ticket-order">Delivery</h2>
+            <div>
+                <span>Add where you want to receive your order.</span>
+            </div>
+        </div>
+    </div>
+    <div nz-col [nzMd]="9" [nzLg]="6" class="box-ticket-summary">
         <div class="box-summary-ticket only-style-right">
             <h2 class="title-ticket-order">Summary</h2>
             <div class="box-descriptions-ticket">
@@ -11,7 +19,7 @@
                 <span>Preparation</span>
                 <span>0,00 $</span>
             </div>
-            <div class="box-descriptions-ticket">
+            <div class="box-descriptions-ticket only-total-ticket">
                 <span>Total</span>
                 <span>52,70 $</span>
             </div>
@@ -19,19 +27,11 @@
                 <span>TAX included</span>
                 <span>4,79 $</span>
             </div>
-            <div>
-                <button>Buy</button>
+            <div class="box-button-ticket">
+                <button nz-button class="ticket-form-button" [nzType]="'primary'">Buy</button>
             </div>
-            <div>
+            <div class="box-terms-ticket">
                 <span>By authorizing payment, you accept our terms and conditions as well as our privacy policy.</span>
-            </div>
-        </div>
-    </div>
-    <div nz-col [nzSpan]="18" [nzPull]="6">
-        <div class="box-summary-ticket">
-            <h2 class="title-ticket-order">Delivery</h2>
-            <div>
-                <span>Add where you want to receive your order.</span>
             </div>
         </div>
     </div>
