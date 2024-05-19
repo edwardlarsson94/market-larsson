@@ -6,6 +6,7 @@ import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { LoginComponent } from '../../modules/auth/login/login.component';
 import { DrawerComponent } from '../../modules/cart/drawer/drawer.component';
+import { Router } from '@angular/router';
 export interface AutocompleteOptionGroups {
   title: string;
   count?: number;
@@ -32,10 +33,14 @@ export class HeaderComponent {
   inputValue?: string;
   optionGroups: AutocompleteOptionGroups[] = [];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   onChange(value: string): void {
     console.log(value);
+  }
+
+  goToAdmin(): void {
+    this.router.navigate(['/admin']);
   }
 
   ngOnInit(): void {

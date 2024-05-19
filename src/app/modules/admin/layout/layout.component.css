@@ -1,0 +1,47 @@
+::ng-deep .ant-menu-item .ant-menu-item-selected, 
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected
+{
+    color: var(--color-button-green-confirm);
+}
+
+::ng-deep .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected::after{
+    border-bottom: 2px solid var(--color-button-green-confirm);
+}
+
+.logo {
+    width: 211px;
+    height: 31px;
+    margin: 16px 24px 16px 0;
+    float: left;
+    background-image: url('../../../../assets/images/mercadona.svg');
+}
+
+[nz-menu] {
+    line-height: 64px;
+}
+
+nz-breadcrumb {
+    margin: 16px 0;
+}
+
+nz-content {
+    padding: 0 50px;
+}
+
+nz-footer {
+    text-align: center;
+}
+
+.inner-content {
+    background: #fff;
+    padding: 24px;
+    min-height: 280px;
+}
+
+.box-header-layout{
+    background-color: var(--color-background);
+}
+.box-content-layout{
+    height: 100vh;
+}
