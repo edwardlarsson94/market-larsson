@@ -1,0 +1,30 @@
+::ng-deep .ant-btn-primary, .ant-btn-primary:active, .ant-btn-primary:hover{
+    background-color: var(--color-button-green-confirm);
+    border-color: var(--color-button-green-confirm);
+}
+::ng-deep .ant-popover-message-title{
+    margin-left: 0.5rem;
+}
+.button-product-layout{
+    color: var(--color-button-green-confirm);
+}
+.box-button-layout{
+    display: flex;
+    justify-content: space-between;
+}
+.button-add-product{
+    background-color: var(--color-button-green-confirm);
+    border-color: var(--color-button-green-confirm);
+    color: var(--color-background);
+}
+.box-button-add{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+.box-name-add{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

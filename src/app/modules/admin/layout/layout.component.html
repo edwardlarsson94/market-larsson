@@ -1,11 +1,15 @@
 <nz-layout>
     <nz-header class="box-header-layout">
-      <div class="logo"></div>
-      <ul nz-menu nzTheme="light" nzMode="horizontal">
-        <li nz-menu-item>Products</li>
-        <li nz-menu-item>Orders</li>
-        <li nz-menu-item>Logout</li>
-      </ul>
+      <div>
+        <div class="logo"></div>
+        <ul nz-menu nzTheme="light" nzMode="horizontal">
+          <li nz-menu-item>Products</li>
+          <li nz-menu-item>Orders</li>
+        </ul>
+      </div>
+      <div class="box-button-logout">
+        <button class="button-logout-layout" nz-button [nzType]="'primary'" (click)="goToProducts()">Logout</button>
+      </div>
     </nz-header>
     <nz-content class="box-content-layout">
       <nz-breadcrumb>
@@ -13,6 +17,8 @@
         <nz-breadcrumb-item>Product</nz-breadcrumb-item>
         <nz-breadcrumb-item>List</nz-breadcrumb-item>
       </nz-breadcrumb>
-      <div class="inner-content">Content</div>
+      <div class="inner-content">
+        <app-products/>
+      </div>
     </nz-content>
 </nz-layout>

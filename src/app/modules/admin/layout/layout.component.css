@@ -17,6 +17,12 @@
     background-image: url('../../../../assets/images/mercadona.svg');
 }
 
+.box-button-logout {
+    right: 50px;
+    position: absolute;
+    top: 0;
+}
+
 [nz-menu] {
     line-height: 64px;
 }
@@ -44,4 +50,9 @@ nz-footer {
 }
 .box-content-layout{
     height: 100vh;
+}
+.button-logout-layout{
+    background-color: transparent;
+    border-color:var(--color-button-red-cancel);
+    color: var(--color-button-red-cancel);
 }
