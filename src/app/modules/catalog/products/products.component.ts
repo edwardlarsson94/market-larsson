@@ -5,6 +5,7 @@ import { HeaderComponent } from '../../../shared/header/header.component';
 import { ProductsService } from '../../../services/products.service';
 import { Observable } from 'rxjs';
 import { ProductResults } from '../../../models/product';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-products',
@@ -12,7 +13,8 @@ import { ProductResults } from '../../../models/product';
   imports: [
     NzGridModule,
     CardsComponent,
-    HeaderComponent
+    HeaderComponent,
+    AsyncPipe
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'

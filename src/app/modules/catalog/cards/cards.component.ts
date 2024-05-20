@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzButtonModule,NzButtonSize } from 'ng-zorro-antd/button';
 import { faMinus, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Product } from '../../../models/product';
 @Component({
   selector: 'app-cards',
   standalone: true,
@@ -19,4 +20,6 @@ export class CardsComponent {
   faTrash = faTrash
   faPlus = faPlus
   faMinus = faMinus
+
+  @Input() productsInfo!: Product;
 }

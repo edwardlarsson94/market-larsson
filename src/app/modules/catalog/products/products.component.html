@@ -4,7 +4,11 @@
   <h2 class="title-section">Products </h2>
   <div class="content-cards" nz-row>
     <div class="box-card" nz-col nzXs="10" nzSm="8" nzMd="6" nzLg="4">
-      <app-cards/>
+      @if(productsResults$ | async; as resultProducts){
+        @for (item of resultProducts?.data; track item?.name) {
+          <app-cards [productsInfo]="item"/>
+        }
+      }
     </div>
   </div>
 </section>

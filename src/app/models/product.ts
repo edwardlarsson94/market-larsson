@@ -1,7 +1,4 @@
 export interface Product {
-}
-
-export interface ProductResults {
     id: string,
     title: string,
     image:string,
@@ -10,4 +7,10 @@ export interface ProductResults {
     price: number,
     availableQuantity:number,
     available: boolean
+}
+
+export interface ProductResults {
+    status: boolean,
+    data: Product[],
+    errors: any
 }
