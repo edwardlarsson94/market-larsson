@@ -5,8 +5,8 @@
     display: flex;
     flex-direction: column;
 }
-
-.box-password-register, 
+.box-email-register,
+.box-password-register,
 .box-confirm-register,
 .box-phone-register{
     margin-top: 2rem;
@@ -44,4 +44,15 @@
 .button-login-now{
     border: transparent;
     background-color: transparent;
+}
+
+@media screen and (max-width: 768px) {
+    .box-email-register, 
+    .box-password-register, 
+    .box-confirm-register{
+        margin:0;
+    }
+    .register-form-button{
+        margin-top:1rem;
+    }
 }

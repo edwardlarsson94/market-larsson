@@ -56,3 +56,15 @@ nz-footer {
     border-color:var(--color-button-red-cancel);
     color: var(--color-button-red-cancel);
 }
+
+@media screen and (max-width: 768px) {
+    .box-header-layout{
+        min-width: 75rem;
+    }
+    .box-content-layout{
+        min-width: 75rem;
+    }
+    .box-button-logout{
+        left: 64rem;
+    }
+}

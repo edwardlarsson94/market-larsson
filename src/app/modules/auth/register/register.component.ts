@@ -29,15 +29,10 @@ import {
 })
 export class RegisterComponent {
   validateForm: FormGroup<{
+    nameRegister: FormControl<string>;
     email: FormControl<string>;
     password: FormControl<string>;
     checkPassword: FormControl<string>;
-    nickname: FormControl<string>;
-    phoneNumberPrefix: FormControl<'+86' | '+87'>;
-    phoneNumber: FormControl<string>;
-    website: FormControl<string>;
-    captcha: FormControl<string>;
-    agree: FormControl<boolean>;
   }>;
   captchaTooltipIcon: NzFormTooltipIcon = {
     type: 'info-circle',
@@ -77,15 +72,10 @@ export class RegisterComponent {
 
   constructor(private fb: NonNullableFormBuilder) {
     this.validateForm = this.fb.group({
+      nameRegister: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required]],
       checkPassword: ['', [Validators.required, this.confirmationValidator]],
-      nickname: ['', [Validators.required]],
-      phoneNumberPrefix: '+86' as '+86' | '+87',
-      phoneNumber: ['', [Validators.required]],
-      website: ['', [Validators.required]],
-      captcha: ['', [Validators.required]],
-      agree: [false]
     });
   }
 }

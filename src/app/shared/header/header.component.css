@@ -46,11 +46,11 @@
 }
 
 @media screen and (max-width: 768px) {
-  .category-button,
-  .login-button,
-  .box-cart-button,
-  .login-and-cart {
+  .logo, .search-bar {
     display: none;
+  }
+  .search-bar{
+    padding: 0;
   }
   .logo-search-and-category {
     width: 100%;
