@@ -17,14 +17,14 @@
           <td>{{ data.name }}</td>
           <td>{{ data.description }}</td>
           <td>{{ data.price }}</td>
-          <td>{{ data.availability }}</td>
+          <td>{{ data.availableQuantity }}</td>
           <td><a class="button-product-layout" (click)="startEdit(data.id)">Edit</a></td>
         </ng-container>
         <ng-template #editTemplate>
           <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.name" /></td>
           <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.description" /></td>
           <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.price" /></td>
-          <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.availability" /></td>
+          <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.availableQuantity" /></td>
           <td>
             <div class="box-button-layout">
                 <a class="button-product-layout" 

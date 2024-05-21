@@ -20,14 +20,8 @@ import {
 import { Observable, Observer } from 'rxjs';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
-interface ItemData {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  availability: number;
-}
+import { ProductsService } from '../../../services/products.service';
+import { Product, ProductResults } from '../../../models/product';
 
 @Component({
   selector: 'app-products',
@@ -48,9 +42,9 @@ interface ItemData {
 })
 
 export class ProductsComponent implements OnInit {
-
-  editCache: { [key: string]: { edit: boolean; data: ItemData } } = {};
-  listOfData: ItemData[] = [];
+  public productsAdminResults$!: Observable<ProductResults>;
+  editCache: { [key: string]: { edit: boolean; data: Product } } = {};
+  listOfData: Product[] = [];
   isVisible = false;
   isFooter = null;
 
@@ -99,18 +93,16 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const data = [];
-    for (let i = 0; i < 100; i++) {
-      data.push({
-        id: `${i}`,
-        name: `Hacendado milk filled cereals ${i}`,
-        description: `Box 500g ${i}`,
-        price: 32,
-        availability:1
-      });
-    }
-    this.listOfData = data;
-    this.updateEditCache();
+    this.productsAdminResults$ = this.service.getProductsList();
+    this.productsAdminResults$.subscribe({
+      next: (results) => {
+        this.listOfData = results.data;
+        this.updateEditCache();
+      },
+      error: (error) => {
+        console.error('Error fetching products:', error);
+      }
+    });
   }
 
   validateForm: FormGroup<{
@@ -156,7 +148,7 @@ export class ProductsComponent implements OnInit {
       }, 1000);
     });
 
-  constructor(private fb: NonNullableFormBuilder) {
+  constructor(private fb: NonNullableFormBuilder, private service: ProductsService) {
     // use `MyValidators`
     const { required, maxLength, minLength } = MyValidators;
     this.validateForm = this.fb.group({
