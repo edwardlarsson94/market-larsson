@@ -53,12 +53,16 @@ export class ProductsComponent implements OnInit {
     this.editCache[id].edit = true;
   }
 
-  DeleteEdit(id: string): void {
-    const index = this.listOfData.findIndex(item => item.id === id);
-    this.editCache[id] = {
-      data: { ...this.listOfData[index] },
-      edit: false
-    };
+  deleteProduct(id: string): void {
+    this.service.deleteProduct(id).subscribe({
+      next: () => {
+        this.listOfData = this.listOfData.filter(item => item.id !== id);
+        this.updateEditCache();
+      },
+      error: (error) => {
+        console.error('There was an error deleting the product!', error);
+      }
+    });
   }
 
   cancelEdit(id: string): void {

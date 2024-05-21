@@ -22,4 +22,9 @@ export class ProductsService {
     const url = `http://localhost:3000/api/product/${productId}`;
     return this.http.patch<Product>(url, updates);
   }
+
+  deleteProduct(productId: string): Observable<void> {
+    const url = `http://localhost:3000/api/product/${productId}`;
+    return this.http.delete<void>(url);
+  }
 }
