@@ -11,7 +11,6 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import {
   AbstractControl,
   AsyncValidatorFn,
-  FormControl,
   FormGroup,
   NonNullableFormBuilder,
   ValidatorFn,
@@ -20,7 +19,7 @@ import {
 import { Observable, Observer } from 'rxjs';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { ProductsService } from '../../../services/products.service';
+import { ProductsService } from '../../../services/product/products.service';
 import { Product, ProductResults } from '../../../models/interface/product/product';
 import { defaultProduct } from '../../../models/default/product/product';
 

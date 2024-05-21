@@ -4,6 +4,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators,  ReactiveFormsModule } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { RegisterComponent } from '../register/register.component';
+import { AuthService } from '../../../services/auth/auth.service';
+import { Login } from '../../../models/interface/auth/login';
 
 @Component({
   selector: 'app-login',
@@ -48,7 +50,27 @@ export class LoginComponent {
 
   submitForm(): void {
     if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
+      const userName = this.validateForm.value.userName;
+      const password = this.validateForm.value.password;
+      if (userName !== undefined && password !== undefined) {
+        const loginData: Login = {
+          nickName: userName,
+          password: password
+        };
+        this.service.login(loginData).subscribe({
+          next: (response) => {
+            console.log('Login response:', response);
+            if(response){
+              this.isVisible = false;
+            }
+          },
+          error: (error) => {
+            console.error('Error logging in:', error);
+          }
+        });
+      } else {
+        console.error('Username or password is undefined');
+      }
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -59,6 +81,6 @@ export class LoginComponent {
     }
   }
 
-  constructor(private fb: NonNullableFormBuilder) {}
+  constructor(private fb: NonNullableFormBuilder, private service: AuthService) {}
 
 }
