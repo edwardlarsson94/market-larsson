@@ -11,7 +11,8 @@ import { AppState } from '../../../state/app.state';
 import { setShowLoginForm } from '../../../state/app.actions';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ import { AsyncPipe } from '@angular/common';
     NzFormModule,
     ReactiveFormsModule,
     RegisterComponent,
-    AsyncPipe
+    AsyncPipe,
+    NzNotificationModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -71,17 +73,35 @@ export class LoginComponent {
         };
         this.service.login(loginData).subscribe({
           next: (response) => {
-            console.log('Login response:', response);
             if(response){
               this.isVisible = false;
             }
+            this.createNotification(
+              "success",
+              "Welcome aboard!",
+              "Hello there! 🎉 You've successfully logged in. Thanks for joining us on this journey. Explore away!"
+            )
           },
           error: (error) => {
-            console.error('Error logging in:', error);
+            let messageError = '';
+            let codeError = '';
+            if(error && error?.error){
+              messageError = error?.error?.errors?.message;
+              codeError = error?.error?.errors?.code;
+            }
+            this.createNotification(
+              "error",
+              "Oops! Something Went Wrong",
+              `Uh-oh! It seems like there was an issue during login. ${messageError}. ${codeError}`
+            )
           }
         });
       } else {
-        console.error('Username or password is undefined');
+        this.createNotification(
+          "error",
+          "Oops! Something Went Wrong",
+          `Username or password is undefined`
+        )
       }
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
@@ -93,10 +113,19 @@ export class LoginComponent {
     }
   }
 
+  createNotification(type: string,title:string,description:string): void {
+    this.notification.create(
+      type,
+      title,
+      description
+    );
+  }
+
   constructor(
     private fb: NonNullableFormBuilder, 
     private service: AuthService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private notification: NzNotificationService
   ) {
     this.showLoginForm$ = this.store.select(state => state.showLoginForm);
   }

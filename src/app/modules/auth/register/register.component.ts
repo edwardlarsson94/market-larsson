@@ -19,6 +19,7 @@ import {
 import { Register } from '../../../models/interface/auth/register';
 import { defaultRegister } from '../../../models/default/auth/auth';
 import { AuthService } from '../../../services/auth/auth.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-register',
@@ -59,12 +60,25 @@ export class RegisterComponent {
 
       this.service.register(registerData).subscribe({
         next: (response) => {
-          console.log('Registration successful', response);
           this.showLoginForm();
+          this.createNotification(
+            "success",
+            "Welcome to the Community!",
+            "Congratulations on joining us! 🎉 Your registration is complete. Get ready to dive into a world of possibilities. Let's start exploring together!"
+          )
         },
         error: (error) => {
-          console.error('Registration failed', error);
-        }
+          let messageError = '';
+          let codeError = '';
+          if(error && error?.error){
+            messageError = error?.error?.errors?.message;
+            codeError = error?.error?.errors?.code;
+          }
+          this.createNotification(
+            "error",
+            "Oops! Something Went Wrong",
+            `Uh-oh! It seems like there was an issue during login. ${messageError}. ${codeError}`
+          )        }
       });
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
@@ -98,10 +112,19 @@ export class RegisterComponent {
     e.preventDefault();
   }
 
+  createNotification(type: string,title:string,description:string): void {
+    this.notification.create(
+      type,
+      title,
+      description
+    );
+  }
+
   constructor(
     private fb: NonNullableFormBuilder,
     private store: Store<AppState>,
-    private service: AuthService
+    private service: AuthService,
+    private notification: NzNotificationService
   ) {
     this.validateForm = this.fb.group({
       nameRegister: ['', [Validators.required]],
