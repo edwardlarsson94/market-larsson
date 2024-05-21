@@ -33,14 +33,8 @@ export class HeaderComponent {
   inputValue?: string;
   optionGroups: AutocompleteOptionGroups[] = [];
 
-  constructor(private router: Router) {}
-
   onChange(value: string): void {
     console.log(value);
-  }
-
-  goToAdmin(): void {
-    this.router.navigate(['/admin']);
   }
 
   ngOnInit(): void {
@@ -84,4 +78,6 @@ export class HeaderComponent {
       ];
     }, 1000);
   }
+
+  constructor() {}
 }

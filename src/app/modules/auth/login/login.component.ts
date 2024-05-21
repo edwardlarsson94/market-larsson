@@ -5,7 +5,7 @@ import { FormControl, FormGroup, NonNullableFormBuilder, Validators,  ReactiveFo
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { RegisterComponent } from '../register/register.component';
 import { AuthService } from '../../../services/auth/auth.service';
-import { Login } from '../../../models/interface/auth/login';
+import { DataLogin, Login } from '../../../models/interface/auth/login';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../state/app.state';
 import { setShowLoginForm } from '../../../state/app.actions';
@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -75,12 +76,19 @@ export class LoginComponent {
           next: (response) => {
             if(response){
               this.isVisible = false;
+              this.validateUser(response?.data);
+              this.createNotification(
+                "success",
+                "Welcome aboard!",
+                "Hello there! 🎉 You've successfully logged in. Thanks for joining us on this journey. Explore away!"
+              )
+            }else{
+              this.createNotification(
+                "error",
+                "Oops! Something Went Wrong",
+                `Uh-oh! It seems like there was an issue during login.`
+              )
             }
-            this.createNotification(
-              "success",
-              "Welcome aboard!",
-              "Hello there! 🎉 You've successfully logged in. Thanks for joining us on this journey. Explore away!"
-            )
           },
           error: (error) => {
             let messageError = '';
@@ -113,6 +121,15 @@ export class LoginComponent {
     }
   }
 
+  validateUser(data: DataLogin | undefined): void {
+      if (data && data.role) {
+        if (data.role === 'admin') {
+          this.router.navigate(['/admin']);
+        }
+      }
+  }
+  
+
   createNotification(type: string,title:string,description:string): void {
     this.notification.create(
       type,
@@ -125,7 +142,8 @@ export class LoginComponent {
     private fb: NonNullableFormBuilder, 
     private service: AuthService,
     private store: Store<AppState>,
-    private notification: NzNotificationService
+    private notification: NzNotificationService,
+    private router: Router
   ) {
     this.showLoginForm$ = this.store.select(state => state.showLoginForm);
   }

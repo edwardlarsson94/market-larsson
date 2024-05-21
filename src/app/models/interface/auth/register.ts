@@ -7,7 +7,7 @@ export interface Register {
     role: string,
 }
 
-export interface LoginResults {
+export interface RegisterResults {
     status: boolean,
     data: Register[],
     errors: any
