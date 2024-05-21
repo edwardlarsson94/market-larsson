@@ -1,21 +1,26 @@
 .box-email-register, 
 .box-password-register, 
 .box-confirm-register,
-.box-phone-register{
+.box-phone-register,
+.user-name-register,
+.box-full-name{
     display: flex;
     flex-direction: column;
 }
 .box-email-register,
 .box-password-register,
 .box-confirm-register,
-.box-phone-register{
+.box-phone-register,
+.user-name-register{
     margin-top: 2rem;
 }
 
 .box-email-register nz-form-label,
 .box-password-register nz-form-label,
 .box-confirm-register nz-form-label,
-.box-phone-register nz-form-label
+.box-phone-register nz-form-label,
+.user-name-register nz-form-label,
+.box-full-name nz-form-label
 {
     text-align: justify;
 }
@@ -49,7 +54,9 @@
 @media screen and (max-width: 768px) {
     .box-email-register, 
     .box-password-register, 
-    .box-confirm-register{
+    .box-confirm-register,
+    .user-name-register,
+    .box-full-name{
         margin:0;
     }
     .register-form-button{

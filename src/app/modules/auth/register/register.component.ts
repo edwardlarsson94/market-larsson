@@ -16,6 +16,9 @@ import {
   Validators,
   ReactiveFormsModule
 } from '@angular/forms';
+import { Register } from '../../../models/interface/auth/register';
+import { defaultRegister } from '../../../models/default/auth/auth';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -34,6 +37,7 @@ export class RegisterComponent {
   validateForm: FormGroup<{
     nameRegister: FormControl<string>;
     email: FormControl<string>;
+    userRegister: FormControl<string>;
     password: FormControl<string>;
     checkPassword: FormControl<string>;
   }>;
@@ -44,7 +48,24 @@ export class RegisterComponent {
 
   submitForm(): void {
     if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
+      const formValues = this.validateForm.value;
+      const registerData: Register = {
+        ...defaultRegister,
+        fullName: formValues.nameRegister ?? '',
+        email: formValues.email ?? '',
+        user: formValues.userRegister ?? '',
+        password: formValues.password ?? ''
+      };
+
+      this.service.register(registerData).subscribe({
+        next: (response) => {
+          console.log('Registration successful', response);
+          this.showLoginForm();
+        },
+        error: (error) => {
+          console.error('Registration failed', error);
+        }
+      });
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -79,11 +100,13 @@ export class RegisterComponent {
 
   constructor(
     private fb: NonNullableFormBuilder,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private service: AuthService
   ) {
     this.validateForm = this.fb.group({
       nameRegister: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
+      userRegister: ['', [Validators.required]],
       password: ['', [Validators.required]],
       checkPassword: ['', [Validators.required, this.confirmationValidator]],
     });

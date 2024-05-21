@@ -1,14 +1,20 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-  <nz-form-item class="box-email-register">
-    <nz-form-label nzRequired nzFor="nameRegister">Full Name</nz-form-label>
-    <nz-form-control nzErrorTip="Please input your full name!">
-      <input nz-input formControlName="nameRegister" id="nameRegister" />
-    </nz-form-control>
-  </nz-form-item>
+    <nz-form-item class="box-full-name">
+      <nz-form-label nzRequired nzFor="nameRegister">Full Name</nz-form-label>
+      <nz-form-control nzErrorTip="Please input your full name!">
+        <input nz-input formControlName="nameRegister" id="nameRegister" />
+      </nz-form-control>
+    </nz-form-item>
     <nz-form-item class="box-email-register">
       <nz-form-label class="label-register-all" nzRequired nzFor="email">E-mail</nz-form-label>
       <nz-form-control nzErrorTip="The input is not valid E-mail!">
         <input nz-input formControlName="email" id="email" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="user-name-register">
+      <nz-form-label class="label-register-all" nzRequired nzFor="userRegister">User Name</nz-form-label>
+      <nz-form-control nzErrorTip="Please input your user name!">
+        <input nz-input formControlName="userRegister" id="userRegister" />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item class="box-password-register">
