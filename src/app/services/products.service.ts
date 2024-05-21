@@ -17,4 +17,9 @@ export class ProductsService {
   createProduct(product: Product): Observable<Product> {
     return this.http.post<Product>('http://localhost:3000/api/product',product);
   }
+
+  updateProduct(productId: string, updates: Partial<Product>): Observable<Product> {
+    const url = `http://localhost:3000/api/product/${productId}`;
+    return this.http.patch<Product>(url, updates);
+  }
 }

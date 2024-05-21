@@ -71,8 +71,16 @@ export class ProductsComponent implements OnInit {
 
   saveEdit(id: string): void {
     const index = this.listOfData.findIndex(item => item.id === id);
-    Object.assign(this.listOfData[index], this.editCache[id].data);
-    this.editCache[id].edit = false;
+    const updatedProduct = this.editCache[id].data;
+    this.service.updateProduct(id, updatedProduct).subscribe({
+      next: (product) => {
+        this.listOfData[index] = product;
+        this.editCache[id].edit = false; 
+      },
+      error: (error) => {
+        console.error('There was an error updating the product!', error);
+      }
+    });
   }
 
   updateEditCache(): void {
@@ -166,7 +174,7 @@ export class ProductsComponent implements OnInit {
   constructor(private fb: NonNullableFormBuilder, private service: ProductsService) {
     const { required, maxLength, minLength } = MyValidators;
     this.validateForm = this.fb.group({
-      nameNew: ['', [required, maxLength(12), minLength(6)], [this.userNameAsyncValidator]],
+      nameNew: ['', [required, maxLength(20), minLength(4)], [this.userNameAsyncValidator]],
       descriptionNew: ['', [required, maxLength(100), minLength(6)], [this.userNameAsyncValidator]],
       priceNew: ['', [required, Validators.min(0)]],
       availabilityNew: ['', [required, Validators.min(0)]]
