@@ -4,7 +4,7 @@ import { CardsComponent } from '../cards/cards.component';
 import { HeaderComponent } from '../../../shared/header/header.component';
 import { ProductsService } from '../../../services/products.service';
 import { Observable } from 'rxjs';
-import { ProductResults } from '../../../models/product';
+import { ProductResults } from '../../../models/interface/product/product';
 import { AsyncPipe } from '@angular/common';
 
 @Component({

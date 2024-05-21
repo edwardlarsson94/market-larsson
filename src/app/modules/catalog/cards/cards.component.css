@@ -2,6 +2,16 @@
     padding: 0 16px;
 }
 
+::ng-deep .ant-card-meta-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 3em;
+    line-height: 1.5em;
+}
+
 .box-title-price-unid{
     display: flex;
     align-items: end;

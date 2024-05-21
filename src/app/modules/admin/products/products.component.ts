@@ -21,7 +21,8 @@ import { Observable, Observer } from 'rxjs';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { ProductsService } from '../../../services/products.service';
-import { Product, ProductResults } from '../../../models/product';
+import { Product, ProductResults } from '../../../models/interface/product/product';
+import { defaultProduct } from '../../../models/default/product/product';
 
 @Component({
   selector: 'app-products',
@@ -87,6 +88,17 @@ export class ProductsComponent implements OnInit {
     this.isVisible = true;
   }
 
+  createProductNew(product: Product): void {
+    this.service.createProduct(product).subscribe({
+      next: (product) => {
+        console.log('Product created successfully', product);
+      },
+      error: (error) => {
+        console.error('There was an error creating the product!', error);
+      }
+    });
+  }
+
   handleCancel(): void {
     console.log('Button cancel clicked!');
     this.isVisible = false;
@@ -105,13 +117,8 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  validateForm: FormGroup<{
-    nameNew: FormControl<string>;
-    descriptionNew: FormControl<string>;
-  }>;
+  validateForm: FormGroup;
 
-  // current locale is key of the nzAutoTips
-  // if it is not found, it will be searched again with `default`
   autoTips: Record<string, Record<string, string>> = {
     'zh-cn': {
       required: 'Input is required'
@@ -123,7 +130,15 @@ export class ProductsComponent implements OnInit {
 
   submitForm(): void {
     if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
+      const formValues = this.validateForm.value;
+      const newProduct: Product = {...defaultProduct,
+        name: formValues?.nameNew,
+        description: formValues?.descriptionNew,
+        price: formValues?.priceNew,
+        availableQuantity: formValues?.availabilityNew
+      }
+      this.createProductNew(newProduct);
+      this.isVisible = false;
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -149,16 +164,16 @@ export class ProductsComponent implements OnInit {
     });
 
   constructor(private fb: NonNullableFormBuilder, private service: ProductsService) {
-    // use `MyValidators`
     const { required, maxLength, minLength } = MyValidators;
     this.validateForm = this.fb.group({
       nameNew: ['', [required, maxLength(12), minLength(6)], [this.userNameAsyncValidator]],
-      descriptionNew: ['', [required, maxLength(12), minLength(6)], [this.userNameAsyncValidator]],
+      descriptionNew: ['', [required, maxLength(100), minLength(6)], [this.userNameAsyncValidator]],
+      priceNew: ['', [required, Validators.min(0)]],
+      availabilityNew: ['', [required, Validators.min(0)]]
     });
   }
-
 }
-// current locale is key of the MyErrorsOptions
+
 export type MyErrorsOptions = { 'zh-cn': string; en: string } & Record<string, NzSafeAny>;
 export type MyValidationErrors = Record<string, MyErrorsOptions>;
 

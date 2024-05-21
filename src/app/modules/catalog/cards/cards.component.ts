@@ -3,7 +3,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzButtonModule,NzButtonSize } from 'ng-zorro-antd/button';
 import { faMinus, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Product } from '../../../models/product';
+import { Product } from '../../../models/interface/product/product';
 @Component({
   selector: 'app-cards',
   standalone: true,
