@@ -41,7 +41,7 @@
       <nz-form-control class="box-register-button">
         <button nz-button class="register-form-button" [nzType]="'primary'">Register</button>
         Or
-        <button class="button-login-now">
+        <button (click)="showLoginForm()" class="button-login-now">
           <span class="text-login-now">Login now!</span>
         </button>
       </nz-form-control>

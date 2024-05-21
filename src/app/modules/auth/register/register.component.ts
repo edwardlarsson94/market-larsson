@@ -3,6 +3,9 @@ import { NzFormModule, NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../state/app.state';
+import { setShowLoginForm } from '../../../state/app.actions';
 
 import {
   AbstractControl,
@@ -52,6 +55,10 @@ export class RegisterComponent {
     }
   }
 
+  showLoginForm(): void {
+    this.store.dispatch(setShowLoginForm({ show: true }));
+  }
+
   updateConfirmValidator(): void {
     /** wait for refresh value */
     Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
@@ -70,7 +77,10 @@ export class RegisterComponent {
     e.preventDefault();
   }
 
-  constructor(private fb: NonNullableFormBuilder) {
+  constructor(
+    private fb: NonNullableFormBuilder,
+    private store: Store<AppState>
+  ) {
     this.validateForm = this.fb.group({
       nameRegister: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],

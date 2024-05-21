@@ -6,6 +6,12 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { RegisterComponent } from '../register/register.component';
 import { AuthService } from '../../../services/auth/auth.service';
 import { Login } from '../../../models/interface/auth/login';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../state/app.state';
+import { setShowLoginForm } from '../../../state/app.actions';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-login',
@@ -15,7 +21,8 @@ import { Login } from '../../../models/interface/auth/login';
     NzButtonModule,
     NzFormModule,
     ReactiveFormsModule,
-    RegisterComponent
+    RegisterComponent,
+    AsyncPipe
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -23,7 +30,8 @@ import { Login } from '../../../models/interface/auth/login';
 export class LoginComponent {
   isVisible = false;
   modalFooter = null;
-
+  showLoginForm$: Observable<boolean>;
+  
   showModal(): void {
     this.isVisible = true;
   }
@@ -47,6 +55,10 @@ export class LoginComponent {
     password: ['', [Validators.required]],
     remember: [true]
   });
+
+  showRegisterComponent(): void {
+    this.store.dispatch(setShowLoginForm({ show: false }));
+  }
 
   submitForm(): void {
     if (this.validateForm.valid) {
@@ -81,6 +93,11 @@ export class LoginComponent {
     }
   }
 
-  constructor(private fb: NonNullableFormBuilder, private service: AuthService) {}
-
+  constructor(
+    private fb: NonNullableFormBuilder, 
+    private service: AuthService,
+    private store: Store<AppState>
+  ) {
+    this.showLoginForm$ = this.store.select(state => state.showLoginForm);
+  }
 }
