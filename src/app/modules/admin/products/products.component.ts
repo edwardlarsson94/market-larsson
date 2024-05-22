@@ -22,6 +22,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { ProductsService } from '../../../services/product/products.service';
 import { Product, ProductResults } from '../../../models/interface/product/product';
 import { defaultProduct } from '../../../models/default/product/product';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-products',
@@ -57,9 +58,25 @@ export class ProductsComponent implements OnInit {
       next: () => {
         this.listOfData = this.listOfData.filter(item => item.id !== id);
         this.updateEditCache();
+        this.getAllProducts();
+        this.createNotification(
+          "success",
+          "Product Deleted",
+          `Heads up! We wanted to inform you that a product has been successfully deleted`
+        )
       },
       error: (error) => {
-        console.error('There was an error deleting the product!', error);
+        let messageError = '';
+        let codeError = '';
+        if(error?.error){
+          messageError = error?.error?.errors?.message;
+          codeError = error?.error?.errors?.code;
+        }
+        this.createNotification(
+          "error",
+          "Error Deleting Product 😕",
+          `"Oh no! It seems like there was an error while trying to delete the product". ${messageError}. ${codeError}`
+        )
       }
     });
   }
@@ -79,9 +96,25 @@ export class ProductsComponent implements OnInit {
       next: (product) => {
         this.listOfData[index] = product;
         this.editCache[id].edit = false; 
+        this.getAllProducts();
+        this.createNotification(
+          "success",
+          "Product Update Notification 🛠️",
+          `Hello! Just a quick heads-up that one of our products has been updated.`
+        )
       },
       error: (error) => {
-        console.error('There was an error updating the product!', error);
+        let messageError = '';
+        let codeError = '';
+        if(error?.error){
+          messageError = error?.error?.errors?.message;
+          codeError = error?.error?.errors?.code;
+        }
+        this.createNotification(
+          "error",
+          "Product Update Error 😕",
+          `"Uh-oh! It seems like there was an error while updating the product". ${messageError}. ${codeError}`
+        )
       }
     });
   }
@@ -102,10 +135,25 @@ export class ProductsComponent implements OnInit {
   createProductNew(product: Product): void {
     this.service.createProduct(product).subscribe({
       next: (product) => {
-        console.log('Product created successfully', product);
+        this.getAllProducts();
+        this.createNotification(
+          "success",
+          "New Product Alert 🚀",
+          `Hey there! 🎉 We're excited to let you know that a new product has been created.`
+        )
       },
       error: (error) => {
-        console.error('There was an error creating the product!', error);
+        let messageError = '';
+        let codeError = '';
+        if(error?.error){
+          messageError = error?.error?.errors?.message;
+          codeError = error?.error?.errors?.code;
+        }
+        this.createNotification(
+          "error",
+          "Product Creation Failed 😕",
+          `"Oops! It looks like there was an issue while creating the new product.". ${messageError}. ${codeError}`
+        )
       }
     });
   }
@@ -115,7 +163,7 @@ export class ProductsComponent implements OnInit {
     this.isVisible = false;
   }
 
-  ngOnInit(): void {
+  getAllProducts(): void {
     this.productsAdminResults$ = this.service.getProductsList();
     this.productsAdminResults$.subscribe({
       next: (results) => {
@@ -126,6 +174,10 @@ export class ProductsComponent implements OnInit {
         console.error('Error fetching products:', error);
       }
     });
+  }
+
+  ngOnInit(): void {
+    this.getAllProducts();
   }
 
   validateForm: FormGroup;
@@ -174,7 +226,18 @@ export class ProductsComponent implements OnInit {
       }, 1000);
     });
 
-  constructor(private fb: NonNullableFormBuilder, private service: ProductsService) {
+  createNotification(type: string,title:string,description:string): void {
+    this.notification.create(
+      type,
+      title,
+      description
+    );
+  }
+
+  constructor(private fb: NonNullableFormBuilder, 
+    private service: ProductsService,
+    private notification: NzNotificationService,
+  ) {
     const { required, maxLength, minLength } = MyValidators;
     this.validateForm = this.fb.group({
       nameNew: ['', [required, maxLength(20), minLength(4)], [this.userNameAsyncValidator]],

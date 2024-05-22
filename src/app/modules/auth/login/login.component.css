@@ -10,7 +10,7 @@
 }
 .box-img-login img{
     width: 250px;
-    height: 500px;
+    height: 600px;
 }
 .box-form-login{
     display: flex;
@@ -41,6 +41,9 @@
     border: transparent;
     background-color: transparent;
 }
+.input-login-form{
+    width: 100%;
+}
 @media screen and (max-width: 768px) {
     .box-form-login{
         width: 100%;
@@ -48,9 +51,6 @@
     }
     .box-img-login{
         display: none;
-    }
-    .input-login-form{
-        width: 100%;
     }
     .box-input-username{
         margin-top: 1rem;

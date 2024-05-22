@@ -93,7 +93,7 @@ export class LoginComponent {
           error: (error) => {
             let messageError = '';
             let codeError = '';
-            if(error && error?.error){
+            if(error?.error){
               messageError = error?.error?.errors?.message;
               codeError = error?.error?.errors?.code;
             }
