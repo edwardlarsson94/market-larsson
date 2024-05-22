@@ -1,7 +1,6 @@
 <nz-card nzHoverable style="width: 240px" [nzCover]="coverTemplate">
     <nz-card-meta [nzTitle]="productsInfo.name" [nzDescription]="productsInfo.description">
     </nz-card-meta>
-    <div>{{productsInfo | json}}</div>
     <div class="box-title-price-unid">
       <h2 class="title-price">{{ productsInfo.price }}</h2>
       <p class="title-unit">/ud.</p>
@@ -21,10 +20,10 @@
             <button class="delete-carts-button" (click)="removeFromCart(productsInfo.id)">
               <fa-icon [icon]="faTrash"></fa-icon>
             </button>
-            <button class="minus-cart-button add-cart-button" (click)="decreaseQuantity(productsInfo.id)">
+            <button class="minus-catalog-button add-cart-button" (click)="decreaseQuantity(productsInfo.id)">
               <fa-icon [icon]="faMinus"></fa-icon>
             </button>
-            <button class="add-carts-button" (click)="increaseQuantity(productsInfo.id)">
+            <button class="add-catalog-button" (click)="increaseQuantity(productsInfo.id)">
               <fa-icon [icon]="faPlus"></fa-icon>
             </button>
           </div>

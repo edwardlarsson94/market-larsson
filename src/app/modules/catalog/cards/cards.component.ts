@@ -42,6 +42,7 @@ export class CardsComponent {
   removeFromCart(productId: string): void {
     const existingProductIndex = this.productsInCart.findIndex(item => item.id === productId);
     if (existingProductIndex !== -1) {
+      this.productsInfo = {...this.productsInfo,quantity:0}
       this.productsInCart.splice(existingProductIndex, 1);
     }
   }
