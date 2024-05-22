@@ -7,5 +7,6 @@ export const defaultProduct: Product = {
     description: 'Default Description',
     price: 0,
     availableQuantity: 0,
+    quantity:0,
     available: true
 };

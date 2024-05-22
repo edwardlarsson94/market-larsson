@@ -1,40 +1,42 @@
 <nz-card nzHoverable style="width: 240px" [nzCover]="coverTemplate">
-<nz-card-meta
-    nzTitle={{productsInfo.name}}
-    nzDescription={{productsInfo.description}}
-></nz-card-meta>
-<div class="box-title-price-unid">
-    <h2 class="title-price">{{productsInfo.price}}</h2>
-    <p class="title-unit">/ud.</p>
-</div>
-<!-- <button class="button-add-cart" nz-button nzType="primary" [nzSize]="size" nzShape="round">
-    Add to cart
-</button> -->
-
-<div class="box-cards-footer">
-    <div>
-        <p class="title-buttons-cars">In Car</p>
-        <p class="box-carts-ud">1 ud.</p>
+    <nz-card-meta [nzTitle]="productsInfo.name" [nzDescription]="productsInfo.description">
+    </nz-card-meta>
+    <div>{{productsInfo | json}}</div>
+    <div class="box-title-price-unid">
+      <h2 class="title-price">{{ productsInfo.price }}</h2>
+      <p class="title-unit">/ud.</p>
     </div>
-    <div class="button-price-carts">
-        <button class="delete-carts-button">
-            <fa-icon [icon]="faTrash"></fa-icon>
+    @if(!productsInfo.quantity){
+        <button class="button-add-cart" nz-button nzType="primary" [nzSize]="size" nzShape="round" (click)="addToCart(productsInfo)">
+          Add to cart
         </button>
-        <!-- <button class="minus-cart-button add-cart-button">
-            <fa-icon [icon]="faMinus"></fa-icon>
-        </button> -->
-        <button class="add-carts-button">
-            <fa-icon [icon]="faPlus"></fa-icon>
-        </button>
-    </div>
-</div>
-
-</nz-card>
-<ng-template #coverTemplate>
-<div class="box-img-cards">
-    <img
-        alt="cereal"
+    }
+    @if(productsInfo.quantity){
+        <div class="box-cards-footer">
+          <div>
+            <p class="title-buttons-cars">In Cart</p>
+            <p class="box-carts-ud">{{ productsInfo.quantity }} ud.</p>
+          </div>
+          <div class="button-price-carts">
+            <button class="delete-carts-button" (click)="removeFromCart(productsInfo.id)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+            <button class="minus-cart-button add-cart-button" (click)="decreaseQuantity(productsInfo.id)">
+              <fa-icon [icon]="faMinus"></fa-icon>
+            </button>
+            <button class="add-carts-button" (click)="increaseQuantity(productsInfo.id)">
+              <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
+          </div>
+        </div>
+    }
+  </nz-card>
+  <ng-template #coverTemplate>
+    <div class="box-img-cards">
+      <img
+        alt="product image"
         [src]="'../../../../assets/images/products' + productsInfo.image"
-    />
-</div>
-</ng-template>
+      />
+    </div>
+  </ng-template>
+  
