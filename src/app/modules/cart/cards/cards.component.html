@@ -14,9 +14,11 @@
             <p>/ud.</p>
           </div>
         </div>
-        <div>
-          <p class="title-buttons-car">In Cart</p>
-          <p class="box-cart-ud">{{ getProductQuantity(item.id) }} ud.</p>
+        <div class="box-title-buttons">
+          <div>
+            <p class="title-buttons-car">In Cart</p>
+            <p class="box-cart-ud">{{ getProductQuantity(item.id) }} ud.</p>
+          </div>
           <div class="button-price-cart">
             <button class="delete-cart-button" (click)="removeFromCart(item.id)">
               <fa-icon [icon]="faTrash"></fa-icon>
