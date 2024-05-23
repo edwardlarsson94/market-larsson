@@ -1,31 +1,39 @@
-<div class="box-img-description">
-    <img
+@if(productsInCart$ | async; as product){
+  @for (item of product; track item?.name) {
+    <div class="box-img-description">
+      <img
         class="box-img-cart"
-        alt="logo"
-        src="../../../../assets/images/cart/product.jpg"
-    />
-    <div class="box-description-buttons">
+        alt="product image"
+        [src]="'../../../../assets/images/products' + item.image"
+      />
+      <div class="box-description-buttons">
         <div>
-            <p>1/4 Watermelon low in seeds</p>
-            <div class="price-cart-title">
-                <p class="box-cart-price">2,79 $</p>
-                <p>/ud.</p>
-            </div>
+          <p>{{ item.name }}</p>
+          <div class="price-cart-title">
+            <p class="box-cart-price">{{ item.price }} $</p>
+            <p>/ud.</p>
+          </div>
         </div>
         <div>
-            <p class="title-buttons-car">In Car</p>
-            <p class="box-cart-ud">1 ud.</p>
-            <div class="button-price-cart">
-                <button class="delete-cart-button">
-                    <fa-icon [icon]="faTrash"></fa-icon>
-                </button>
-                <!-- <button class="minus-cart-button add-cart-button">
-                    <fa-icon [icon]="faMinus"></fa-icon>
-                </button> -->
-                <button class="add-cart-button">
-                    <fa-icon [icon]="faPlus"></fa-icon>
-                </button>
-            </div>
+          <p class="title-buttons-car">In Cart</p>
+          <p class="box-cart-ud">{{ getProductQuantity(item.id) }} ud.</p>
+          <div class="button-price-cart">
+            <button class="delete-cart-button" (click)="removeFromCart(item.id)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+            @if(item.quantity > 1){
+              <button class="minus-cart-button add-cart-button" (click)="decreaseQuantity(item.id)">
+                <fa-icon [icon]="faMinus"></fa-icon>
+              </button>
+            }
+            <button class="add-cart-button" (click)="increaseQuantity(item.id)">
+              <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  }
+}
+
+

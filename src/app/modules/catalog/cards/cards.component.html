@@ -23,9 +23,11 @@
               <button class="delete-carts-button" (click)="removeFromCart(productsInfo.id)">
                 <fa-icon [icon]="faTrash"></fa-icon>
               </button>
-              <button class="minus-catalog-button add-cart-button" (click)="decreaseQuantity(productsInfo.id)">
-                <fa-icon [icon]="faMinus"></fa-icon>
-              </button>
+              @if(item.quantity > 1){
+                <button class="minus-catalog-button add-cart-button" (click)="decreaseQuantity(productsInfo.id)">
+                  <fa-icon [icon]="faMinus"></fa-icon>
+                </button>
+              }
               <button class="add-catalog-button" (click)="increaseQuantity(productsInfo.id)">
                 <fa-icon [icon]="faPlus"></fa-icon>
               </button>
