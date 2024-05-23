@@ -5,29 +5,34 @@
       <h2 class="title-price">{{ productsInfo.price }}</h2>
       <p class="title-unit">/ud.</p>
     </div>
-    @if(!productsInfo.quantity){
+
+    @if(productsInCart$ | async; as cartProducts){
+      <ng-container *ngIf="checkIfNotInCart(productsInfo.id, cartProducts)">
         <button class="button-add-cart" nz-button nzType="primary" [nzSize]="size" nzShape="round" (click)="addToCart(productsInfo)">
           Add to cart
         </button>
-    }
-    @if(productsInfo.quantity){
-        <div class="box-cards-footer">
-          <div>
-            <p class="title-buttons-cars">In Cart</p>
-            <p class="box-carts-ud">{{ productsInfo.quantity }} ud.</p>
+      </ng-container>
+      @for (item of cartProducts; track item?.name) {
+        @if(item.id === productsInfo.id){
+          <div class="box-cards-footer">
+            <div>
+              <p class="title-buttons-cars">In Cart</p>
+              <p class="box-carts-ud">{{ item.quantity }} ud.</p>
+            </div>
+            <div class="button-price-carts">
+              <button class="delete-carts-button" (click)="removeFromCart(productsInfo.id)">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </button>
+              <button class="minus-catalog-button add-cart-button" (click)="decreaseQuantity(productsInfo.id)">
+                <fa-icon [icon]="faMinus"></fa-icon>
+              </button>
+              <button class="add-catalog-button" (click)="increaseQuantity(productsInfo.id)">
+                <fa-icon [icon]="faPlus"></fa-icon>
+              </button>
+            </div>
           </div>
-          <div class="button-price-carts">
-            <button class="delete-carts-button" (click)="removeFromCart(productsInfo.id)">
-              <fa-icon [icon]="faTrash"></fa-icon>
-            </button>
-            <button class="minus-catalog-button add-cart-button" (click)="decreaseQuantity(productsInfo.id)">
-              <fa-icon [icon]="faMinus"></fa-icon>
-            </button>
-            <button class="add-catalog-button" (click)="increaseQuantity(productsInfo.id)">
-              <fa-icon [icon]="faPlus"></fa-icon>
-            </button>
-          </div>
-        </div>
+        }
+      }
     }
   </nz-card>
   <ng-template #coverTemplate>
