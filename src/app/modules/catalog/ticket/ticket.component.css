@@ -60,6 +60,11 @@
     color: var(--color-background);
     margin-right: 1rem;
 }
+
+.ant-select.ant-select-in-form-item.phone-select {
+    width: 70px;
+}
+
 @media screen and (min-width: 768px) {
     .only-style-delivery{
         margin-right: 1rem;

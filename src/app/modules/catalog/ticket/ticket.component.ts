@@ -11,6 +11,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { AppState } from '../../../state/app.state';
 import { Product } from '../../../models/interface/product/product';
 import { AsyncPipe, DecimalPipe } from '@angular/common';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+
 
 @Component({
   selector: 'app-ticket',
@@ -23,7 +25,8 @@ import { AsyncPipe, DecimalPipe } from '@angular/common';
     ReactiveFormsModule,
     NzInputModule,
     AsyncPipe,
-    DecimalPipe
+    DecimalPipe,
+    NzSelectModule
   ],
   templateUrl: './ticket.component.html',
   styleUrl: './ticket.component.css'
@@ -31,7 +34,8 @@ import { AsyncPipe, DecimalPipe } from '@angular/common';
 export class TicketComponent {
   validateForm: FormGroup<{
     address: FormControl<string>;
-    email: FormControl<string>;
+    phoneNumberPrefix: FormControl<'+1' | '+57'>;
+    phoneNumber: FormControl<string>;
     comment: FormControl<string>;
   }>;
 
@@ -42,7 +46,8 @@ export class TicketComponent {
   constructor(private fb: NonNullableFormBuilder, private store: Store<AppState>) {
     this.validateForm = this.fb.group({
       address: ['', [Validators.required], [this.userNameAsyncValidator]],
-      email: ['', [Validators.email, Validators.required]],
+      phoneNumberPrefix: '+1' as '+1' | '+57',
+      phoneNumber: ['', [Validators.required]],
       comment: ['', [Validators.required]]
     });
 

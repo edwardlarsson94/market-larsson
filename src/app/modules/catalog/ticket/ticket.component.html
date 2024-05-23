@@ -21,17 +21,21 @@
             </nz-form-control>
           </nz-form-item>
           <nz-form-item>
-            <nz-form-label [nzSpan]="7" nzRequired>E-mail</nz-form-label>
-            <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="emailErrorTpl">
-              <input nz-input formControlName="email" placeholder="email" type="email" />
-              <ng-template #emailErrorTpl let-control>
-                @if (control.errors?.['email']) {
-                  The input is not valid E-mail!
-                }
-                @if (control.errors?.['required']) {
-                  Please input your E-mail!
-                }
-              </ng-template>
+            <nz-form-label [nzSpan]="7" nzFor="phoneNumber" nzRequired>Phone Number</nz-form-label>
+            <nz-form-control
+              [nzSpan]="12"
+              [nzValidateStatus]="validateForm.controls['phoneNumber']"
+              nzErrorTip="Please input your phone number!"
+            >
+              <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+                <ng-template #addOnBeforeTemplate>
+                  <nz-select formControlName="phoneNumberPrefix" class="phone-select">
+                    <nz-option nzLabel="+1" nzValue="+1"></nz-option>
+                    <nz-option nzLabel="+57" nzValue="+57"></nz-option>
+                  </nz-select>
+                </ng-template>
+                <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
+              </nz-input-group>
             </nz-form-control>
           </nz-form-item>
           <nz-form-item>
