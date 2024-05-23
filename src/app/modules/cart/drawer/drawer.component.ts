@@ -11,7 +11,8 @@ import { Product } from '../../../models/interface/product/product';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CardsComponent } from '../cards/cards.component';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
+import { clearCart } from '../../../state/app.actions';
 
 @Component({
   selector: 'app-drawer',
@@ -22,8 +23,7 @@ import { AsyncPipe, NgIf } from '@angular/common';
     CardsComponent,
     NzButtonModule,
     NzModalModule,
-    AsyncPipe,
-    NgIf
+    AsyncPipe
   ],
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.css']
@@ -61,10 +61,15 @@ export class DrawerComponent {
       nzOkText: 'Yes',
       nzOkType: 'primary',
       nzOkDanger: true,
-      nzOnOk: () => console.log('OK'),
+      nzOnOk: () => this.clearCart(),
       nzCancelText: 'No',
       nzOnCancel: () => console.log('Cancel')
     });
+  }
+
+  clearCart(): void {
+    this.store.dispatch(clearCart());
+    this.close();
   }
 
   navigateToTickets() {

@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { setShowLoginForm } from './app.actions';
-import { addToCart, removeFromCart, increaseQuantity, decreaseQuantity } from '../state/app.actions';
+import { addToCart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart } from '../state/app.actions';
 import { Product } from '../models/interface/product/product';
 
 export const initialState: boolean = true;
@@ -32,7 +32,8 @@ const _cartReducer = createReducer(
   }),
   on(decreaseQuantity, (state, { productId }) => {
     return state.map(item => item.id === productId && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item).filter(item => item.quantity > 0);
-  })
+  }),
+  on(clearCart, () => initialCartState)
 );
 
 export function cartReducer(state:any, action:any) {

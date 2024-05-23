@@ -1,13 +1,16 @@
 <div>
-  <button *ngIf="(totalItems$ | async) === 0" class="cart-button" (click)="open()">
-    <fa-icon [icon]="faCartShopping"></fa-icon>
-  </button>
-  
-  <button *ngIf="(totalItems$ | async) ?? 0 > 0" class="cart-button-active" (click)="open()">
-    <fa-icon [icon]="faCartShopping"></fa-icon>
-    <div class="amount-product-cart">{{ totalItems$ | async }}</div>
-    <div class="price-product-cart">{{ totalPrice$ | async }}$</div>
-  </button>
+  @if((totalItems$ | async) === 0){
+    <button class="cart-button" (click)="open()">
+      <fa-icon [icon]="faCartShopping"></fa-icon>
+    </button>
+  }
+  @if((totalItems$ | async) ?? 0 > 0){
+    <button class="cart-button-active" (click)="open()">
+      <fa-icon [icon]="faCartShopping"></fa-icon>
+      <div class="amount-product-cart">{{ totalItems$ | async }}</div>
+      <div class="price-product-cart">{{ totalPrice$ | async }}$</div>
+    </button>
+  }
 </div>
 
 <nz-drawer
@@ -22,29 +25,47 @@
   [nzFooter]="footerTemplate"
 >
   <ng-container *nzDrawerContent>
-    <app-cards></app-cards>
+    @if((totalItems$ | async) ?? 0 > 0){
+      <app-cards></app-cards>
+    }@else{
+      <div class="box-img-text">
+        <div class="img-cart-empty">
+          <img
+              alt="cart"
+              src="../../../../assets/images/cart/cart.png"
+          />    
+        </div>
+        <div class="text-cart-empty">
+          <p>You have not yet added products to your cart</p>  
+        </div>
+      </div>
+    }
   </ng-container>
 </nz-drawer>
 
 <ng-template #extraTemplate>
-  <div class="box-cart-empty">
-    <div>
-      <button class="cart-button-empty" nz-button nzType="text" (click)="showDeleteConfirm()">Empty</button>
+  @if((totalItems$ | async) ?? 0 > 0){
+    <div class="box-cart-empty">
+      <div>
+        <button class="cart-button-empty" nz-button nzType="text" (click)="showDeleteConfirm()">Empty</button>
+      </div>
+      <button class="cart-button" (click)="showDeleteConfirm()">
+        <fa-icon [icon]="faTrashCan"></fa-icon>
+      </button>
     </div>
-    <button class="cart-button" (click)="showDeleteConfirm()">
-      <fa-icon [icon]="faTrashCan"></fa-icon>
-    </button>
-  </div>
+  }
 </ng-template>
 
 <ng-template #footerTemplate>
-  <div class="box-footer-cart">
-    <div class="box-total-approximate">
-      <p class="text-total-approximate">Approximate Total</p>
-      <h3 class="price-total-approximate">{{ totalPrice$ | async }} $</h3>
+  @if((totalItems$ | async) ?? 0 > 0){
+    <div class="box-footer-cart">
+      <div class="box-total-approximate">
+        <p class="text-total-approximate">Approximate Total</p>
+        <h3 class="price-total-approximate">{{ totalPrice$ | async }} $</h3>
+      </div>
+      <div>
+        <button nz-button class="button-footer-cart" [nzType]="'primary'" (click)="navigateToTickets()">Place an order</button>
+      </div>
     </div>
-    <div>
-      <button nz-button class="button-footer-cart" [nzType]="'primary'" (click)="navigateToTickets()">Place an order</button>
-    </div>
-  </div>
+  }
 </ng-template>

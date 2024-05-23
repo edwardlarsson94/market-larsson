@@ -11,6 +11,30 @@
 .cart-button-empty{
     padding: 0;
 }
+.box-img-text{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.img-cart-empty{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+.text-cart-empty{
+    display: flex;
+    justify-content: center;
+    width: 215px;
+    text-align: center;
+    color: var(--color-secondary);
+}
+.img-cart-empty img{
+    width: 150px;
+}
 .cart-button-active{
     background-color: var(--color-button-add-border);
     border-color: var(--color-button-add-border);
