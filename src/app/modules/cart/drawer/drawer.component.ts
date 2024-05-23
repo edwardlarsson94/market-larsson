@@ -1,12 +1,18 @@
 import { Component } from '@angular/core';
-import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { Store } from '@ngrx/store';
 import { faCartShopping, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CardsComponent } from '../cards/cards.component';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzModalModule } from 'ng-zorro-antd/modal';
-import { NzModalService } from 'ng-zorro-antd/modal'
+import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { Router } from '@angular/router';
+import { AppState } from '../../../state/app.state';
+import { Product } from '../../../models/interface/product/product';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { CardsComponent } from '../cards/cards.component';
+import { AsyncPipe, NgIf } from '@angular/common';
+
 @Component({
   selector: 'app-drawer',
   standalone: true,
@@ -15,18 +21,30 @@ import { Router } from '@angular/router';
     FontAwesomeModule,
     CardsComponent,
     NzButtonModule,
-    NzModalModule
+    NzModalModule,
+    AsyncPipe,
+    NgIf
   ],
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.css']
 })
 export class DrawerComponent {
-
-  constructor(private modal: NzModalService,private router: Router) {}
-
   faCartShopping = faCartShopping;
-  faTrashCan = faTrashCan
+  faTrashCan = faTrashCan;
   visible = false;
+  productsInCart$: Observable<Product[]>;
+  totalItems$: Observable<number>;
+  totalPrice$: Observable<number>;
+
+  constructor(private store: Store<AppState>, private modal: NzModalService, private router: Router) {
+    this.productsInCart$ = this.store.select('productsInCart');
+    this.totalItems$ = this.productsInCart$.pipe(
+      map(products => products.reduce((acc, product) => acc + product.quantity, 0))
+    );
+    this.totalPrice$ = this.productsInCart$.pipe(
+      map(products => products.reduce((acc, product) => acc + product.price * product.quantity, 0))
+    );
+  }
 
   open(): void {
     this.visible = true;
@@ -52,6 +70,4 @@ export class DrawerComponent {
   navigateToTickets() {
     this.router.navigate(['/tickets']);
   }
-
-
 }

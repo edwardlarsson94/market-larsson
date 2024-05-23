@@ -1,31 +1,30 @@
-<!-- <button class="cart-button" (click)="open()">
-    <fa-icon [icon]="faCartShopping"></fa-icon>
-</button> -->
-
-<button class="cart-button-active" (click)="open()">
-  <fa-icon [icon]="faCartShopping"></fa-icon>
-  <div class="amount-product-cart">10</div>
-  <div class="price-product-cart">200$</div>
-</button>
-
 <div>
-
-  <nz-drawer
-    [nzClosable]="true"
-    [nzVisible]="visible"
-    nzPlacement="right"
-    nzTitle="Cart"
-    (nzOnClose)="close()"
-    nzNoAnimation="true"
-    nzWrapClassName="title-modal-cart"
-    [nzExtra]="extraTemplate"
-    [nzFooter]="footerTemplate"
-  >
-  <ng-container *nzDrawerContent>
-      <app-cards/>
-  </ng-container>
-  </nz-drawer> 
+  <button *ngIf="(totalItems$ | async) === 0" class="cart-button" (click)="open()">
+    <fa-icon [icon]="faCartShopping"></fa-icon>
+  </button>
+  
+  <button *ngIf="(totalItems$ | async) ?? 0 > 0" class="cart-button-active" (click)="open()">
+    <fa-icon [icon]="faCartShopping"></fa-icon>
+    <div class="amount-product-cart">{{ totalItems$ | async }}</div>
+    <div class="price-product-cart">{{ totalPrice$ | async }}$</div>
+  </button>
 </div>
+
+<nz-drawer
+  [nzClosable]="true"
+  [nzVisible]="visible"
+  nzPlacement="right"
+  nzTitle="Cart"
+  (nzOnClose)="close()"
+  nzNoAnimation="true"
+  nzWrapClassName="title-modal-cart"
+  [nzExtra]="extraTemplate"
+  [nzFooter]="footerTemplate"
+>
+  <ng-container *nzDrawerContent>
+    <app-cards></app-cards>
+  </ng-container>
+</nz-drawer>
 
 <ng-template #extraTemplate>
   <div class="box-cart-empty">
@@ -42,7 +41,7 @@
   <div class="box-footer-cart">
     <div class="box-total-approximate">
       <p class="text-total-approximate">Approximate Total</p>
-      <h3 class="price-total-approximate">57,80 $</h3>
+      <h3 class="price-total-approximate">{{ totalPrice$ | async }} $</h3>
     </div>
     <div>
       <button nz-button class="button-footer-cart" [nzType]="'primary'" (click)="navigateToTickets()">Place an order</button>
