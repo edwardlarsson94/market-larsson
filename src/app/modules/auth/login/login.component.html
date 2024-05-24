@@ -4,8 +4,10 @@
       <h3 class="title-name-user">{{ user.fullName }}</h3>
       <button class="button-logout-logout" nz-button [nzType]="'primary'" (click)="logoutUser()">Logout</button>
     </div>
-  }@else {
+  }@else if(showLoginForm$ | async){
     <button nz-button (click)="showModal()" nzType="text"><span>Login</span></button>
+  }@else {
+    <button nz-button (click)="showModal()" nzType="text"><span>Register</span></button>
   }
 }
 <nz-modal nzClassName="title-modal-login" 

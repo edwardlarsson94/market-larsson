@@ -40,6 +40,7 @@ export class LoginComponent {
 
   showModal(): void {
     this.isVisible = true;
+    this.validateForm.reset();
   }
 
   logoutUser(): void {
