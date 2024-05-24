@@ -77,6 +77,7 @@ export class LoginComponent {
             if(response){
               this.isVisible = false;
               this.validateUser(response?.data);
+              this.getDataUser(response?.data);
               this.createNotification(
                 "success",
                 "Welcome aboard!",
@@ -122,13 +123,37 @@ export class LoginComponent {
   }
 
   validateUser(data: DataLogin | undefined): void {
-      if (data && data.role) {
+      if (data?.role) {
         if (data.role === 'admin') {
           this.router.navigate(['/admin']);
         }
       }
   }
   
+  getDataUser(data: DataLogin | undefined): void {
+      if (data?.id) {
+        this.service.getUser(data?.id).subscribe({
+          next: (response) => {
+            if(response?.data){
+              console.log(response?.data,'Insertar data del usuario en el estado');
+            }
+          },
+          error: (error) => {
+            let messageError = '';
+            let codeError = '';
+            if(error?.error){
+              messageError = error?.error?.errors?.message;
+              codeError = error?.error?.errors?.code;
+            }
+            this.createNotification(
+              "error",
+              "Oops! Something Went Wrong",
+              `Uh-oh! It seems like there was an issue during login. ${messageError}. ${codeError}`
+            )
+          }
+        });
+      }
+  }
 
   createNotification(type: string,title:string,description:string): void {
     this.notification.create(
