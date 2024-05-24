@@ -130,7 +130,7 @@ export class LoginComponent {
   validateUser(data: string | undefined): void {
       if (data) {
         if (data === 'admin') {
-          this.router.navigate(['/admin']);
+          this.router.navigate(['/admin/products']);
         }
       }
   }

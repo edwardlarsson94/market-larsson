@@ -42,7 +42,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
   styleUrl: './products.component.css'
 })
 
-export class ProductsComponent implements OnInit {
+export class ProductsComponentAdmin implements OnInit {
   public productsAdminResults$!: Observable<ProductResults>;
   editCache: { [key: string]: { edit: boolean; data: Product } } = {};
   listOfData: Product[] = [];
