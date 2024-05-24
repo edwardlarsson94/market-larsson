@@ -1,1 +1,33 @@
-<p>orders works!</p>
+<nz-table #editRowTable nzBordered [nzData]="listOfData" nzTableLayout="fixed">
+    <thead>
+      <tr>
+        <th nzWidth="25%" scope="col">Full Name</th>
+        <th nzWidth="25%" scope="col">Address</th>
+        <th nzWidth="15%" scope="col">Total</th>
+        <th nzWidth="15%" scope="col">Amount</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of editRowTable.data">
+        <ng-container>
+          <td>{{ data.name }}</td>
+          <td>{{ data.description }}</td>
+          <td>{{ data.price }}</td>
+          <td>{{ data.availableQuantity }}</td>
+          <td><a class="button-order-layout" (click)="showModal()">View Detail</a></td>
+        </ng-container>
+      </tr>
+    </tbody>
+</nz-table>
+<nz-modal 
+  [(nzVisible)]="isVisible" 
+  nzTitle="Details Order" 
+  (nzOnCancel)="handleCancel()"
+  [nzFooter]="isFooter"
+>
+  <ng-container *nzModalContent>
+    <div class="box-form-add">
+    </div>
+  </ng-container>
+</nz-modal>

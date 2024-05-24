@@ -9,5 +9,6 @@ export const defaultTicket: Ticket = {
     address: '',
     phoneNumber: '',
     phoneNumberPrefix:'',
-    comment: ''
+    comment: '',
+    createdAt: ''
 };

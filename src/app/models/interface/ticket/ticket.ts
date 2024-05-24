@@ -7,7 +7,8 @@ export interface Ticket {
     address: string,
     phoneNumber: string,
     phoneNumberPrefix:string
-    comment: string
+    comment: string,
+    createdAt: string
 }
 
 export interface DataTicket {

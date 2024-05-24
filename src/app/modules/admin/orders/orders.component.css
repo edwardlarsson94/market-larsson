@@ -1,0 +1,10 @@
+::ng-deep .ant-btn-primary, .ant-btn-primary:active, .ant-btn-primary:hover{
+    background-color: var(--color-button-green-confirm);
+    border-color: var(--color-button-green-confirm);
+}
+::ng-deep .ant-popover-message-title{
+    margin-left: 0.5rem;
+}
+.button-order-layout{
+    color: var(--color-button-green-confirm);
+}

@@ -13,9 +13,17 @@
   </nz-header>
   <nz-content class="box-content-layout">
     <nz-breadcrumb>
-      <nz-breadcrumb-item>Admin</nz-breadcrumb-item>
-      <nz-breadcrumb-item>Product</nz-breadcrumb-item>
-      <nz-breadcrumb-item>List</nz-breadcrumb-item>
+      @if(breadcrumbs.length === 0){
+        <nz-breadcrumb-item>Admin</nz-breadcrumb-item>
+        <nz-breadcrumb-item>Product</nz-breadcrumb-item>
+        <nz-breadcrumb-item>List</nz-breadcrumb-item>
+      }@else{
+        <nz-breadcrumb-item>Admin</nz-breadcrumb-item>
+        <nz-breadcrumb-item *ngFor="let breadcrumb of breadcrumbs">
+          <a [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a>
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>List</nz-breadcrumb-item>
+      }
     </nz-breadcrumb>
     <div class="inner-content">
       <router-outlet></router-outlet>
