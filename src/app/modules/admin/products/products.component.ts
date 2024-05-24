@@ -159,7 +159,6 @@ export class ProductsComponentAdmin implements OnInit {
   }
 
   handleCancel(): void {
-    console.log('Button cancel clicked!');
     this.isVisible = false;
   }
 

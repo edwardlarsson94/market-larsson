@@ -129,7 +129,7 @@ export class TicketComponent {
       nzOkDanger: false,
       nzOnOk: () => this.checkout(),
       nzCancelText: 'No',
-      nzOnCancel: () => console.log('Cancel')
+      nzOnCancel: () => {}
     });
   }
 

@@ -67,7 +67,7 @@ export class DrawerComponent {
       nzOkDanger: true,
       nzOnOk: () => this.clearCart(),
       nzCancelText: 'No',
-      nzOnCancel: () => console.log('Cancel')
+      nzOnCancel: () => {}
     });
   }
 
