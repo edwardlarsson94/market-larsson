@@ -82,7 +82,6 @@ export class LoginComponent {
           next: (response) => {
             if(response){
               this.isVisible = false;
-              this.validateUser(response?.data);
               this.getDataUser(response?.data);
               this.createNotification(
                 "success",
@@ -128,9 +127,9 @@ export class LoginComponent {
     }
   }
 
-  validateUser(data: DataLogin | undefined): void {
-      if (data?.role) {
-        if (data.role === 'admin') {
+  validateUser(data: string | undefined): void {
+      if (data) {
+        if (data === 'admin') {
           this.router.navigate(['/admin']);
         }
       }
@@ -150,6 +149,7 @@ export class LoginComponent {
                 role: response.data.role
               };
               this.store.dispatch(setUser({ user }));
+              this.validateUser(user.role);
             }
           },
           error: (error) => {
