@@ -2,11 +2,11 @@ import { Routes } from '@angular/router';
 import { ProductsComponent } from './modules/catalog/products/products.component';
 import { TicketComponent } from './modules/catalog/ticket/ticket.component';
 import { LayoutComponent } from './modules/admin/layout/layout.component';
-
+import { authGuard } from './guards/auth/auth.guard';
+import { adminGuard } from './guards/admin/admin.guard';
 
 export const routes: Routes = [
   { path: '', component: ProductsComponent },
-  // { path: '**', component: ProductsComponent },
-  { path: 'tickets', component: TicketComponent },
-  { path: 'admin', component: LayoutComponent }
+  { path: 'tickets', component: TicketComponent, canActivate: [authGuard] },
+  { path: 'admin', component: LayoutComponent, canActivate: [adminGuard] }
 ];
