@@ -4,9 +4,10 @@ import { ProductsComponentAdmin } from './modules/admin/products/products.compon
 import { OrdersComponent } from './modules/admin/orders/orders.component';
 import { TicketComponent } from './modules/catalog/ticket/ticket.component';
 import { LayoutComponent } from './modules/admin/layout/layout.component';
-import { authGuard } from './guards/auth/auth.guard';
-import { adminGuard } from './guards/admin/admin.guard';
+
 import { ProductsComponent } from './modules/catalog/products/products.component';
+import { authGuard } from './core/guards/auth/auth.guard';
+import { adminGuard } from './core/guards/admin/admin.guard';
 
 export const routes: Routes = [
   { path: '', component: ProductsComponent },

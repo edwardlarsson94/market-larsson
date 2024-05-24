@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BannerComponent } from '../../../shared/banner/banner.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, NonNullableFormBuilder, ValidationErrors, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -17,6 +16,7 @@ import { defaultTicket } from '../../../models/default/ticket/ticket';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { User } from '../../../models/interface/auth/user';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
+import { BannerComponent } from '../../shared/banner/banner.component';
 
 @Component({
   selector: 'app-ticket',

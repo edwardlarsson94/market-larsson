@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { CardsComponent } from '../cards/cards.component';
-import { HeaderComponent } from '../../../shared/header/header.component';
 import { ProductsService } from '../../../services/product/products.service';
 import { Observable } from 'rxjs';
 import { ProductResults } from '../../../models/interface/product/product';
 import { AsyncPipe } from '@angular/common';
+import { HeaderComponent } from '../../shared/header/header.component';
 
 @Component({
   selector: 'app-products',

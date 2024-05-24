@@ -4,9 +4,9 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { LoginComponent } from '../../modules/auth/login/login.component';
-import { DrawerComponent } from '../../modules/cart/drawer/drawer.component';
-import { Router } from '@angular/router';
+import { LoginComponent } from '../../auth/login/login.component';
+import { DrawerComponent } from '../../cart/drawer/drawer.component';
+
 export interface AutocompleteOptionGroups {
   title: string;
   count?: number;
