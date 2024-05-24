@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { FormControl, FormGroup, NonNullableFormBuilder, Validators,  ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, NonNullableFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { RegisterComponent } from '../register/register.component';
 import { AuthService } from '../../../services/auth/auth.service';
 import { DataLogin, Login } from '../../../models/interface/auth/login';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../state/app.state';
-import { setShowLoginForm, setUser } from '../../../state/app.actions';
+import { setShowLoginForm, setUser, clearUser } from '../../../state/app.actions';
 import { Observable } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Router } from '@angular/router';
@@ -26,7 +26,8 @@ import { User } from '../../../models/interface/auth/user';
     ReactiveFormsModule,
     RegisterComponent,
     AsyncPipe,
-    NzNotificationModule
+    NzNotificationModule,
+    JsonPipe
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -35,22 +36,21 @@ export class LoginComponent {
   isVisible = false;
   modalFooter = null;
   showLoginForm$: Observable<boolean>;
-  
+  user$: Observable<User | null>;
+
   showModal(): void {
     this.isVisible = true;
   }
 
   logoutUser(): void {
-    console.log('test');
+    this.store.dispatch(clearUser());
   }
 
   handleOk(): void {
-    console.log('Button ok clicked!');
     this.isVisible = false;
   }
 
   handleCancel(): void {
-    console.log('Button cancel clicked!');
     this.isVisible = false;
   }
 
@@ -184,5 +184,6 @@ export class LoginComponent {
     private router: Router
   ) {
     this.showLoginForm$ = this.store.select(state => state.showLoginForm);
+    this.user$ = this.store.select(state => state.user);
   }
 }

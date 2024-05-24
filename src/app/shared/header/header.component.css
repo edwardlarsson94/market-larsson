@@ -46,8 +46,11 @@
 }
 
 @media screen and (max-width: 768px) {
-  .logo, .search-bar {
+  .search-bar {
     display: none;
+  }
+  .logo {
+    min-width: 58px;
   }
   .search-bar{
     padding: 0;

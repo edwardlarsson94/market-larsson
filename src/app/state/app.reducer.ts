@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { setShowLoginForm, setUser, addToCart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart } from './app.actions';
+import { setShowLoginForm, setUser, clearUser, addToCart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart } from './app.actions';
 import { Product } from '../models/interface/product/product';
 import { User } from '../models/interface/auth/user';
 import { defaultRegister } from '../models/default/auth/auth';
@@ -40,7 +40,8 @@ const _cartReducer = createReducer(
 
 const _userReducer = createReducer(
   initialUserState,
-  on(setUser, (state, { user }) => user)
+  on(setUser, (state, { user }) => user),
+  on(clearUser, () => initialUserState)
 );
 
 export function cartReducer(state: any, action: any) {

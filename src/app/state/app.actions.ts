@@ -33,3 +33,5 @@ export const setUser = createAction(
   '[User] Set User',
   props<{ user: User }>()
 );
+
+export const clearUser = createAction('[User] Clear User');

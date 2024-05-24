@@ -1,7 +1,13 @@
-<button nz-button (click)="showModal()" nzType="text"><span>Login</span></button>
-<button class="button-logout-logout" nz-button [nzType]="'primary'" (click)="logoutUser()">Logout</button>
-
-
+@if(user$ | async; as user){
+  @if(user.fullName){
+    <div class="box-logout-name">
+      <h3 class="title-name-user">{{ user.fullName }}</h3>
+      <button class="button-logout-logout" nz-button [nzType]="'primary'" (click)="logoutUser()">Logout</button>
+    </div>
+  }@else {
+    <button nz-button (click)="showModal()" nzType="text"><span>Login</span></button>
+  }
+}
 <nz-modal nzClassName="title-modal-login" 
           [(nzVisible)]="isVisible" 
           nzTitle="Welcome, please login or register." 

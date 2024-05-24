@@ -12,10 +12,20 @@
     width: 250px;
     height: 600px;
 }
+.box-logout-name{
+    width: 100%;
+    padding-right: 1rem;
+    display: flex;
+    align-items: center;
+}
+.title-name-user{
+    margin: 0;
+}
 .button-logout-logout{
     background-color: transparent;
     border-color:var(--color-button-red-cancel);
     color: var(--color-button-red-cancel);
+    margin-left: 1rem;
 }
 .box-form-login{
     display: flex;
