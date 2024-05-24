@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -9,9 +9,10 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { Observable } from 'rxjs';
-import { ProductsService } from '../../../services/product/products.service';
-import { Product, ProductResults } from '../../../models/interface/product/product';
+import { OrderService } from '../../../services/order/order.service';
+import { Ticket, TicketResults } from '../../../models/interface/ticket/ticket';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { defaultTicket } from '../../../models/default/ticket/ticket';
 
 @Component({
   selector: 'app-orders',
@@ -32,8 +33,8 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 })
 
 export class OrdersComponent implements OnInit {
-  public productsAdminResults$!: Observable<ProductResults>;
-  listOfData: Product[] = [];
+  public ordersResults$!: Observable<TicketResults>;
+  listOfData: Ticket[] = [defaultTicket];
   isVisible = false;
   isFooter = null;
 
@@ -46,23 +47,33 @@ export class OrdersComponent implements OnInit {
     this.isVisible = false;
   }
 
-  getAllProducts(): void {
-    this.productsAdminResults$ = this.service.getProductsList();
-    this.productsAdminResults$.subscribe({
+  getAllOrders(): void {
+    this.ordersResults$ = this.service.getOrdersList();
+    this.ordersResults$.subscribe({
       next: (results) => {
         this.listOfData = results.data;
       },
       error: (error) => {
-        console.error('Error fetching products:', error);
+        let messageError = '';
+        let codeError = '';
+        if(error?.error){
+          messageError = error?.error?.errors?.message;
+          codeError = error?.error?.errors?.code;
+        }
+        this.createNotification(
+          "error",
+          "Order Get Failed 😕",
+          `"Oops! It looks like there was an issue while getting the orders.". ${messageError}. ${codeError}`
+        )
       }
     });
   }
 
   ngOnInit(): void {
-    this.getAllProducts();
+    this.getAllOrders();
   }
 
-  createNotification(type: string,title:string,description:string): void {
+  createNotification(type: string, title: string, description: string): void {
     this.notification.create(
       type,
       title,
@@ -70,8 +81,5 @@ export class OrdersComponent implements OnInit {
     );
   }
 
-  constructor(private service: ProductsService,
-    private notification: NzNotificationService,
-  ) {
-  }
+  constructor(private service: OrderService, private notification: NzNotificationService) { }
 }

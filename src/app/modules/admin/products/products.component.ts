@@ -171,7 +171,17 @@ export class ProductsComponentAdmin implements OnInit {
         this.updateEditCache();
       },
       error: (error) => {
-        console.error('Error fetching products:', error);
+        let messageError = '';
+        let codeError = '';
+        if(error?.error){
+          messageError = error?.error?.errors?.message;
+          codeError = error?.error?.errors?.code;
+        }
+        this.createNotification(
+          "error",
+          "Product Get Failed 😕",
+          `"Oops! It looks like there was an issue while getting the products.". ${messageError}. ${codeError}`
+        )
       }
     });
   }

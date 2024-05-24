@@ -11,14 +11,8 @@ export interface Ticket {
     createdAt: string
 }
 
-export interface DataTicket {
-    id: string,
-    role: string,
-    token:string
-}
-
 export interface TicketResults {
     status: boolean,
-    data: DataTicket,
+    data: [Ticket],
     errors: any
 }
