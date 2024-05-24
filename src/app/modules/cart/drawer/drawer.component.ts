@@ -13,6 +13,8 @@ import { map } from 'rxjs/operators';
 import { CardsComponent } from '../cards/cards.component';
 import { AsyncPipe } from '@angular/common';
 import { clearCart } from '../../../state/app.actions';
+import { User } from '../../../models/interface/auth/user';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-drawer',
@@ -35,8 +37,9 @@ export class DrawerComponent {
   productsInCart$: Observable<Product[]>;
   totalItems$: Observable<number>;
   totalPrice$: Observable<number>;
+  user$: Observable<User | null>;
 
-  constructor(private store: Store<AppState>, private modal: NzModalService, private router: Router) {
+  constructor(private store: Store<AppState>, private modal: NzModalService, private router: Router, private notification: NzNotificationService,) {
     this.productsInCart$ = this.store.select('productsInCart');
     this.totalItems$ = this.productsInCart$.pipe(
       map(products => products.reduce((acc, product) => acc + product.quantity, 0))
@@ -44,6 +47,7 @@ export class DrawerComponent {
     this.totalPrice$ = this.productsInCart$.pipe(
       map(products => products.reduce((acc, product) => acc + product.price * product.quantity, 0))
     );
+    this.user$ = this.store.select('user');
   }
 
   open(): void {
@@ -72,7 +76,27 @@ export class DrawerComponent {
     this.close();
   }
 
-  navigateToTickets() {
-    this.router.navigate(['/tickets']);
+  createNotification(type: string,title:string,description:string): void {
+    this.notification.create(
+      type,
+      title,
+      description
+    );
+  }
+
+  navigateToTickets(): void {
+    this.user$.subscribe(user => {
+      if (user?.id) {
+        this.router.navigate(['/tickets']);
+      } else {
+        this.createNotification(
+          "error",
+          "Login Required 🛑",
+          `Oops! It seems like you're not logged in. 
+            Please log in to proceed with your purchase. 
+            If you don't have an account yet, you can easily create one. Happy shopping!`
+        )
+      }
+    }).unsubscribe();
   }
 }
