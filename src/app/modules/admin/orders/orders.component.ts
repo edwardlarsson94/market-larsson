@@ -33,7 +33,6 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 export class OrdersComponent implements OnInit {
   public productsAdminResults$!: Observable<ProductResults>;
-  editCache: { [key: string]: { edit: boolean; data: Product } } = {};
   listOfData: Product[] = [];
   isVisible = false;
   isFooter = null;
