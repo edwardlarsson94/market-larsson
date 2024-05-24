@@ -7,14 +7,8 @@ export interface User {
     role: string
 }
 
-export interface DataUser {
-    id: string,
-    role: string,
-    token:string
-}
-
 export interface UserResults {
     status: boolean,
-    data: DataUser,
+    data: User,
     errors: any
 }

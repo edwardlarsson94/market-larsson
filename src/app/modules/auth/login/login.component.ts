@@ -8,12 +8,13 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { DataLogin, Login } from '../../../models/interface/auth/login';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../state/app.state';
-import { setShowLoginForm } from '../../../state/app.actions';
+import { setShowLoginForm, setUser } from '../../../state/app.actions';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Router } from '@angular/router';
+import { User } from '../../../models/interface/auth/user';
 
 @Component({
   selector: 'app-login',
@@ -37,6 +38,10 @@ export class LoginComponent {
   
   showModal(): void {
     this.isVisible = true;
+  }
+
+  logoutUser(): void {
+    console.log('test');
   }
 
   handleOk(): void {
@@ -135,7 +140,15 @@ export class LoginComponent {
         this.service.getUser(data?.id).subscribe({
           next: (response) => {
             if(response?.data){
-              console.log(response?.data,'Insertar data del usuario en el estado');
+              const user: User = {
+                id: response.data.id,
+                fullName: response.data.fullName,
+                email: response.data.email,
+                user: response.data.user,
+                password: '',
+                role: response.data.role
+              };
+              this.store.dispatch(setUser({ user }));
             }
           },
           error: (error) => {

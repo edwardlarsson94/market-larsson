@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
-import { authReducer, cartReducer } from './state/app.reducer';
+import { authReducer, cartReducer, userReducer } from './state/app.reducer';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -11,6 +11,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimations(),
     provideHttpClient(withFetch()),
-    provideStore({ showLoginForm: authReducer, productsInCart: cartReducer })
+    provideStore({ showLoginForm: authReducer, productsInCart: cartReducer, user: userReducer })
   ]
 };

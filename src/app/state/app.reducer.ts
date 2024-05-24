@@ -1,10 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
-import { setShowLoginForm } from './app.actions';
-import { addToCart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart } from '../state/app.actions';
+import { setShowLoginForm, setUser, addToCart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart } from './app.actions';
 import { Product } from '../models/interface/product/product';
+import { User } from '../models/interface/auth/user';
+import { defaultRegister } from '../models/default/auth/auth';
 
 export const initialState: boolean = true;
 export const initialCartState: Product[] = [];
+export const initialUserState: User = defaultRegister;
 
 const _authReducer = createReducer(
   initialState,
@@ -36,10 +38,19 @@ const _cartReducer = createReducer(
   on(clearCart, () => initialCartState)
 );
 
-export function cartReducer(state:any, action:any) {
+const _userReducer = createReducer(
+  initialUserState,
+  on(setUser, (state, { user }) => user)
+);
+
+export function cartReducer(state: any, action: any) {
   return _cartReducer(state, action);
 }
 
 export function authReducer(state: any, action: any) {
   return _authReducer(state, action);
+}
+
+export function userReducer(state: any, action: any) {
+  return _userReducer(state, action);
 }

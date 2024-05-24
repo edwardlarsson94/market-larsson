@@ -12,6 +12,11 @@
     width: 250px;
     height: 600px;
 }
+.button-logout-logout{
+    background-color: transparent;
+    border-color:var(--color-button-red-cancel);
+    color: var(--color-button-red-cancel);
+}
 .box-form-login{
     display: flex;
     flex-direction: column;

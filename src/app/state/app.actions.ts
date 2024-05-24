@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Product } from '../models/interface/product/product';
+import { User } from '../models/interface/auth/user';
 
 export const setShowLoginForm = createAction(
   '[Auth] Set Show Login Form',
@@ -27,3 +28,8 @@ export const decreaseQuantity = createAction(
 );
 
 export const clearCart = createAction('[Cart] Clear Cart');
+
+export const setUser = createAction(
+  '[User] Set User',
+  props<{ user: User }>()
+);

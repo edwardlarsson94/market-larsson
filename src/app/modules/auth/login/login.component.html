@@ -1,4 +1,6 @@
 <button nz-button (click)="showModal()" nzType="text"><span>Login</span></button>
+<button class="button-logout-logout" nz-button [nzType]="'primary'" (click)="logoutUser()">Logout</button>
+
 
 <nz-modal nzClassName="title-modal-login" 
           [(nzVisible)]="isVisible" 
