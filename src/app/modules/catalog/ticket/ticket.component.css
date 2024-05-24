@@ -1,3 +1,7 @@
+::ng-deep .ant-btn-primary, .ant-btn-primary:hover{
+    background-color: var(--color-button-green-confirm);
+    border-color: var(--color-button-green-confirm);
+}
 .box-ticket-order{
    background-color: var(--color-background-secondary);
    height: 100vh;
@@ -19,7 +23,6 @@
     padding: 24px;
     background-color: var(--color-background);
     border: 1px solid var(--color-border-bottom);
-    padding: 24px;
 }
 .box-ticket-delivery, .box-ticket-summary{
     width: 100%;

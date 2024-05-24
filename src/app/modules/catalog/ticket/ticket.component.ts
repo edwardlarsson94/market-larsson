@@ -16,6 +16,7 @@ import { Ticket } from '../../../models/interface/ticket/ticket';
 import { defaultTicket } from '../../../models/default/ticket/ticket';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { User } from '../../../models/interface/auth/user';
+import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-ticket',
@@ -29,7 +30,8 @@ import { User } from '../../../models/interface/auth/user';
     NzInputModule,
     AsyncPipe,
     DecimalPipe,
-    NzSelectModule
+    NzSelectModule,
+    NzModalModule
   ],
   templateUrl: './ticket.component.html',
   styleUrl: './ticket.component.css'
@@ -47,8 +49,14 @@ export class TicketComponent {
   totalPrice$: Observable<number>;
   user$: Observable<User | null>;
   stateButtonBuy: boolean;
+  formData: Ticket = { ...defaultTicket };
 
-  constructor(private fb: NonNullableFormBuilder, private store: Store<AppState>, private notification: NzNotificationService) {
+  constructor(private fb: NonNullableFormBuilder, 
+      private store: Store<AppState>, 
+      private notification: NzNotificationService,
+      private modal: NzModalService
+    ) 
+  {
     this.validateForm = this.fb.group({
       address: [{ value: '', disabled: false }, [Validators.required], [this.userNameAsyncValidator]],
       phoneNumberPrefix: '+1' as '+1' | '+57',
@@ -67,26 +75,24 @@ export class TicketComponent {
   }
 
   submitForm(): void {
-    if (this.validateForm.valid) {
-      const formData: Ticket = { ...defaultTicket };
-      
+    if (this.validateForm.valid) {      
       this.totalPrice$.subscribe(totalPrice => {
-        formData.amountProduct = totalPrice;
-        formData.tax = totalPrice * 0.08;
+        this.formData.amountProduct = totalPrice;
+        this.formData.tax = totalPrice * 0.08;
       }).unsubscribe();
       
       this.totalItems$.subscribe(totalItems => {
-        formData.total = totalItems;
+        this.formData.total = totalItems;
       }).unsubscribe();
       
       this.user$.subscribe(user => {
-        formData.fullName = user?.fullName ?? '';
+        this.formData.fullName = user?.fullName ?? '';
       }).unsubscribe();
       
-      formData.address = this.validateForm.value.address ?? '';
-      formData.comment = this.validateForm.value.comment ?? '';
-      formData.phoneNumber = this.validateForm.value.phoneNumber ?? '';
-      formData.phoneNumberPrefix = this.validateForm.value.phoneNumberPrefix ?? '';
+      this.formData.address = this.validateForm.value.address ?? '';
+      this.formData.comment = this.validateForm.value.comment ?? '';
+      this.formData.phoneNumber = this.validateForm.value.phoneNumber ?? '';
+      this.formData.phoneNumberPrefix = this.validateForm.value.phoneNumberPrefix ?? '';
       this.validateFormAndButton();
     } else {
       this.createNotification(
@@ -108,6 +114,23 @@ export class TicketComponent {
   resetForm(e: MouseEvent): void {
     e.preventDefault();
     this.validateForm.reset();
+  }
+
+  checkout(): void {
+    console.log(this.formData);
+  }
+
+  showConfirmBuy(): void {
+    this.modal.confirm({
+      nzTitle: 'Confirm Purchase 🛒',
+      nzContent: '<b">Are you sure you want to proceed with this purchase?</b>',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: false,
+      nzOnOk: () => this.checkout(),
+      nzCancelText: 'No',
+      nzOnCancel: () => console.log('Cancel')
+    });
   }
 
   createNotification(type: string, title: string, description: string): void {

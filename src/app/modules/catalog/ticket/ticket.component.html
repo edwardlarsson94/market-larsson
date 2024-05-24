@@ -80,7 +80,7 @@
         <span>{{ ((totalPrice$ | async) ?? 0) * 0.08 | number: '1.2-2' }} $</span>
       </div>
       <div class="box-button-ticket">
-        <button nz-button class="ticket-form-button" [nzType]="'primary'" [disabled]="!stateButtonBuy">Buy</button>
+        <button nz-button class="ticket-form-button" [nzType]="'primary'" [disabled]="!stateButtonBuy" (click)="showConfirmBuy()">Buy</button>
       </div>
       <div class="box-terms-ticket">
         <span>By authorizing payment, you accept our terms and conditions as well as our privacy policy.</span>
