@@ -35,6 +35,11 @@
     background-color: var(--color-button-green-confirm);
     border-color: var(--color-button-green-confirm);
 }
+.ant-btn-primary[disabled]{
+    width: 100%;
+    background-color: var(--color-background-secondary);
+    border-color: var(--color-background-secondary);
+}
 .box-button-ticket{
     margin-top: 2rem;
 }
@@ -50,8 +55,8 @@
 }
 .button-ticket-confirm{
     width: 100%;
+    
     background-color: var(--color-button-green-confirm);
-    color: var(--color-background);
 }
 .button-ticket-reset{
     width: 100%;

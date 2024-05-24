@@ -12,6 +12,9 @@ import { AppState } from '../../../state/app.state';
 import { Product } from '../../../models/interface/product/product';
 import { AsyncPipe, DecimalPipe } from '@angular/common';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { Ticket } from '../../../models/interface/ticket/ticket';
+import { defaultTicket } from '../../../models/default/ticket/ticket';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 
 @Component({
@@ -42,15 +45,16 @@ export class TicketComponent {
   productsInCart$: Observable<Product[]>;
   totalItems$: Observable<number>;
   totalPrice$: Observable<number>;
+  stateButtonBuy:boolean;
 
-  constructor(private fb: NonNullableFormBuilder, private store: Store<AppState>) {
+  constructor(private fb: NonNullableFormBuilder, private store: Store<AppState>,private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
-      address: ['', [Validators.required], [this.userNameAsyncValidator]],
+      address: [{ value: '', disabled: false }, [Validators.required], [this.userNameAsyncValidator]],
       phoneNumberPrefix: '+1' as '+1' | '+57',
       phoneNumber: ['', [Validators.required]],
       comment: ['', [Validators.required]]
     });
-
+    this.stateButtonBuy = false;
     this.productsInCart$ = this.store.select('productsInCart');
     this.totalItems$ = this.productsInCart$.pipe(
       map(products => products.reduce((acc, product) => acc + product.quantity, 0))
@@ -61,12 +65,45 @@ export class TicketComponent {
   }
 
   submitForm(): void {
-    console.log('submit', this.validateForm.value);
+    if (this.validateForm.valid) {
+      const formData: Ticket = { ...defaultTicket };
+      this.totalPrice$.subscribe(totalPrice => {
+        formData.amountProduct = totalPrice;
+        formData.tax = totalPrice * 0.08;
+      });
+      this.totalItems$.subscribe(totalItems => {
+        formData.total = totalItems;
+      });
+      formData.address = this.validateForm.value.address ?? '';
+      formData.comment = this.validateForm.value.comment ?? '';
+      formData.phoneNumber = this.validateForm.value.phoneNumber ?? '';
+      formData.phoneNumberPrefix = this.validateForm.value.phoneNumberPrefix ?? '';
+      this.stateButtonBuy = true;
+      this.validateForm.get('address')?.disable();
+      this.validateForm.get('phoneNumberPrefix')?.disable();
+      this.validateForm.get('phoneNumber')?.disable();
+      this.validateForm.get('comment')?.disable();
+    } else {
+      this.createNotification(
+        "error",
+        "Form Incomplete! 🚨",
+        `Oops! It looks like you missed filling out some required fields in the form.`
+      )
+    }
   }
+  
 
   resetForm(e: MouseEvent): void {
     e.preventDefault();
     this.validateForm.reset();
+  }
+
+  createNotification(type: string,title:string,description:string): void {
+    this.notification.create(
+      type,
+      title,
+      description
+    );
   }
 
   userNameAsyncValidator: AsyncValidatorFn = (control: AbstractControl) =>
