@@ -15,7 +15,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { Ticket } from '../../../models/interface/ticket/ticket';
 import { defaultTicket } from '../../../models/default/ticket/ticket';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-
+import { User } from '../../../models/interface/auth/user';
 
 @Component({
   selector: 'app-ticket',
@@ -45,9 +45,10 @@ export class TicketComponent {
   productsInCart$: Observable<Product[]>;
   totalItems$: Observable<number>;
   totalPrice$: Observable<number>;
-  stateButtonBuy:boolean;
+  user$: Observable<User | null>;
+  stateButtonBuy: boolean;
 
-  constructor(private fb: NonNullableFormBuilder, private store: Store<AppState>,private notification: NzNotificationService) {
+  constructor(private fb: NonNullableFormBuilder, private store: Store<AppState>, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
       address: [{ value: '', disabled: false }, [Validators.required], [this.userNameAsyncValidator]],
       phoneNumberPrefix: '+1' as '+1' | '+57',
@@ -62,27 +63,31 @@ export class TicketComponent {
     this.totalPrice$ = this.productsInCart$.pipe(
       map(products => products.reduce((acc, product) => acc + product.price * product.quantity, 0))
     );
+    this.user$ = this.store.select('user');
   }
 
   submitForm(): void {
     if (this.validateForm.valid) {
       const formData: Ticket = { ...defaultTicket };
+      
       this.totalPrice$.subscribe(totalPrice => {
         formData.amountProduct = totalPrice;
         formData.tax = totalPrice * 0.08;
-      });
+      }).unsubscribe();
+      
       this.totalItems$.subscribe(totalItems => {
         formData.total = totalItems;
-      });
+      }).unsubscribe();
+      
+      this.user$.subscribe(user => {
+        formData.fullName = user?.fullName ?? '';
+      }).unsubscribe();
+      
       formData.address = this.validateForm.value.address ?? '';
       formData.comment = this.validateForm.value.comment ?? '';
       formData.phoneNumber = this.validateForm.value.phoneNumber ?? '';
       formData.phoneNumberPrefix = this.validateForm.value.phoneNumberPrefix ?? '';
-      this.stateButtonBuy = true;
-      this.validateForm.get('address')?.disable();
-      this.validateForm.get('phoneNumberPrefix')?.disable();
-      this.validateForm.get('phoneNumber')?.disable();
-      this.validateForm.get('comment')?.disable();
+      this.validateFormAndButton();
     } else {
       this.createNotification(
         "error",
@@ -91,14 +96,21 @@ export class TicketComponent {
       )
     }
   }
-  
+
+  validateFormAndButton(): void {
+    this.stateButtonBuy = true;
+    this.validateForm.get('address')?.disable();
+    this.validateForm.get('phoneNumberPrefix')?.disable();
+    this.validateForm.get('phoneNumber')?.disable();
+    this.validateForm.get('comment')?.disable();
+  }
 
   resetForm(e: MouseEvent): void {
     e.preventDefault();
     this.validateForm.reset();
   }
 
-  createNotification(type: string,title:string,description:string): void {
+  createNotification(type: string, title: string, description: string): void {
     this.notification.create(
       type,
       title,
