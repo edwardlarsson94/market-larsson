@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:market-larsson": "node dist/market-larsson/server/server.mjs"
+    "build:ssr": "ng build --configuration production && ng run market-larsson:server:production",
+    "serve:ssr": "node dist/market-larsson/server/main.js"
   },
   "private": true,
   "dependencies": {
