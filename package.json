@@ -5,9 +5,11 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:ssr": "ng build --configuration production && ng run market-larsson:server:production",
+    "prerender": "ng run market-larsson:prerender",
+    "serve:ssr": "node dist/market-larsson/server/main.js",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "serve:ssr:market-larsson": "node dist/market-larsson/server/server.mjs"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
