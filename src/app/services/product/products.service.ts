@@ -11,20 +11,20 @@ export class ProductsService {
   constructor(private http: HttpClient) { }
 
   getProductsList(): Observable<ProductResults>{
-    return this.http.get<ProductResults>('https://market-larsson-api.azurewebsites.net/product');
+    return this.http.get<ProductResults>('https://market-larsson-api.azurewebsites.net/api/product');
   }
   
   createProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>('https://market-larsson-api.azurewebsites.net/product',product);
+    return this.http.post<Product>('https://market-larsson-api.azurewebsites.net/api/product',product);
   }
 
   updateProduct(productId: string, updates: Partial<Product>): Observable<Product> {
-    const url = `https://market-larsson-api.azurewebsites.net/product/${productId}`;
+    const url = `https://market-larsson-api.azurewebsites.net/api/product/${productId}`;
     return this.http.patch<Product>(url, updates);
   }
 
   deleteProduct(productId: string): Observable<void> {
-    const url = `https://market-larsson-api.azurewebsites.net/product/${productId}`;
+    const url = `https://market-larsson-api.azurewebsites.net/api/product/${productId}`;
     return this.http.delete<void>(url);
   }
 }
