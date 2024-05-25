@@ -17,6 +17,10 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { User } from '../../../models/interface/auth/user';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { BannerComponent } from '../../shared/banner/banner.component';
+import { OrderService } from '../../../services/order/order.service';
+import { MyValidators } from '../../admin/products/products.component';
+import { clearCart } from '../../../state/app.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ticket',
@@ -38,6 +42,7 @@ import { BannerComponent } from '../../shared/banner/banner.component';
 })
 export class TicketComponent {
   validateForm: FormGroup<{
+    fullName: FormControl<string>;
     address: FormControl<string>;
     phoneNumberPrefix: FormControl<'+1' | '+57'>;
     phoneNumber: FormControl<string>;
@@ -54,13 +59,17 @@ export class TicketComponent {
   constructor(private fb: NonNullableFormBuilder, 
       private store: Store<AppState>, 
       private notification: NzNotificationService,
-      private modal: NzModalService
+      private modal: NzModalService,
+      private service: OrderService,
+      private router: Router
     ) 
   {
+    const { required, maxLength, minLength } = MyValidators;
     this.validateForm = this.fb.group({
+      fullName: [{ value: '', disabled: false }, [Validators.required], [this.userNameAsyncValidator]],
       address: [{ value: '', disabled: false }, [Validators.required], [this.userNameAsyncValidator]],
       phoneNumberPrefix: '+1' as '+1' | '+57',
-      phoneNumber: ['', [Validators.required]],
+      phoneNumber: ['', [required, minLength(10),maxLength(10)]],
       comment: ['', [Validators.required]]
     });
     this.stateButtonBuy = false;
@@ -84,11 +93,7 @@ export class TicketComponent {
       this.totalItems$.subscribe(totalItems => {
         this.formData.total = totalItems;
       }).unsubscribe();
-      
-      this.user$.subscribe(user => {
-        this.formData.fullName = user?.fullName ?? '';
-      }).unsubscribe();
-      
+      this.formData.fullName = this.validateForm.value.fullName ?? 'No Name';
       this.formData.address = this.validateForm.value.address ?? '';
       this.formData.comment = this.validateForm.value.comment ?? '';
       this.formData.phoneNumber = this.validateForm.value.phoneNumber ?? '';
@@ -117,7 +122,32 @@ export class TicketComponent {
   }
 
   checkout(): void {
-    console.log(this.formData);
+    this.service.createOrder(this.formData).subscribe({
+      next: (res) => {
+        if(res){
+          this.store.dispatch(clearCart());
+          this.router.navigate(['/']);          
+          this.createNotification(
+            "success",
+            "New Order Alert 🚀",
+            `Hey there! 🎉 We're excited to let you know that a new order has been created.`
+          )
+        }
+      },
+      error: (error) => {
+        let messageError = '';
+        let codeError = '';
+        if(error?.error){
+          messageError = error?.error?.errors?.message;
+          codeError = error?.error?.errors?.code;
+        }
+        this.createNotification(
+          "error",
+          "Order Creation Failed 😕",
+          `"Oops! It looks like there was an issue while creating the order.". ${messageError}. ${codeError}`
+        )
+      }
+    });
   }
 
   showConfirmBuy(): void {

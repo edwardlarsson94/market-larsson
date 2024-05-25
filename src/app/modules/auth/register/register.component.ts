@@ -36,9 +36,9 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 })
 export class RegisterComponent {
   validateForm: FormGroup<{
-    nameRegister: FormControl<string>;
+    // nameRegister: FormControl<string>;
     email: FormControl<string>;
-    userRegister: FormControl<string>;
+    // userRegister: FormControl<string>;
     password: FormControl<string>;
     checkPassword: FormControl<string>;
   }>;
@@ -52,9 +52,7 @@ export class RegisterComponent {
       const formValues = this.validateForm.value;
       const registerData: Register = {
         ...defaultRegister,
-        fullName: formValues.nameRegister ?? '',
         email: formValues.email ?? '',
-        user: formValues.userRegister ?? '',
         password: formValues.password ?? ''
       };
 
@@ -127,9 +125,9 @@ export class RegisterComponent {
     private notification: NzNotificationService
   ) {
     this.validateForm = this.fb.group({
-      nameRegister: ['', [Validators.required]],
+      // nameRegister: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
-      userRegister: ['', [Validators.required]],
+      // userRegister: ['', [Validators.required]],
       password: ['', [Validators.required]],
       checkPassword: ['', [Validators.required, this.confirmationValidator]],
     });

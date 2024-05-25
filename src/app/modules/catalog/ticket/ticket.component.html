@@ -7,6 +7,20 @@
       <div class="box-form-ticket">
         <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
           <nz-form-item>
+            <nz-form-label [nzSpan]="7" nzRequired>Full Name</nz-form-label>
+            <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="fullNameErrorTpl">
+              <input nz-input formControlName="fullName" placeholder="Type Full Name"/>
+              <ng-template #fullNameErrorTpl let-control>
+                @if (control.errors?.['required']) {
+                  Please input your Full Name!
+                }
+                @if (control.errors?.['duplicated']) {
+                  The full name is redundant!
+                }
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
             <nz-form-label [nzSpan]="7" nzRequired>Address</nz-form-label>
             <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="addressErrorTpl">
               <input nz-input formControlName="address" placeholder="async validate try to write Colombia"/>

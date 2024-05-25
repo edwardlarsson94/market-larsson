@@ -7,12 +7,16 @@
     display: flex;
     flex-direction: column;
 }
-.box-email-register,
+
 .box-password-register,
 .box-confirm-register,
 .box-phone-register,
 .user-name-register{
     margin-top: 2rem;
+}
+
+.box-email-register{
+    margin-top: 0;
 }
 
 .box-email-register nz-form-label,

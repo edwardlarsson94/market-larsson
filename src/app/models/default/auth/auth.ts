@@ -2,7 +2,7 @@ import { Register } from "../../interface/auth/register";
 
 export const defaultRegister: Register = {
     id: '',
-    fullName: '',
+    fullName: 'No Name',
     email: '',
     user: '',
     password: '',

@@ -15,6 +15,7 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Router } from '@angular/router';
 import { User } from '../../../models/interface/auth/user';
+import { AuthPipe } from '../../../core/pipe/auth.pipe';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,8 @@ import { User } from '../../../models/interface/auth/user';
     RegisterComponent,
     AsyncPipe,
     NzNotificationModule,
-    JsonPipe
+    JsonPipe,
+    AuthPipe
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -75,7 +77,7 @@ export class LoginComponent {
       const password = this.validateForm.value.password;
       if (userName !== undefined && password !== undefined) {
         const loginData: Login = {
-          nickName: userName,
+          email: userName,
           password: password
         };
         this.service.login(loginData).subscribe({
@@ -114,7 +116,7 @@ export class LoginComponent {
         this.createNotification(
           "error",
           "Oops! Something Went Wrong",
-          `Username or password is undefined`
+          `Email or password is undefined`
         )
       }
     } else {
@@ -142,9 +144,9 @@ export class LoginComponent {
             if(response?.data){
               const user: User = {
                 id: response.data.id,
-                fullName: response.data.fullName,
+                fullName: 'No Name',
                 email: response.data.email,
-                user: response.data.user,
+                user: '',
                 password: '',
                 role: response.data.role
               };

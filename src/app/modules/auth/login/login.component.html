@@ -1,7 +1,11 @@
 @if(user$ | async; as user){
-  @if(user.fullName){
+  @if(user.email){
     <div class="box-logout-name">
-      <h3 class="title-name-user">{{ user.fullName }}</h3>
+      @if(user.fullName === 'No Name'){
+        <h3 class="title-name-user">{{ user.email | auth  }}</h3>
+      }@else {
+        <h3 class="title-name-user">{{ user.fullName }}</h3>
+      }
       <button class="button-logout-logout" nz-button [nzType]="'primary'" (click)="logoutUser()">Logout</button>
     </div>
   }@else if(showLoginForm$ | async){
@@ -36,7 +40,7 @@
                     <nz-form-item class="box-input-username">
                       <nz-form-control nzErrorTip="Please input your username!">
                         <nz-input-group nzPrefixIcon="user">
-                          <input class="input-login-form" type="text" nz-input formControlName="userName" placeholder="Username" />
+                          <input class="input-login-form" type="text" nz-input formControlName="userName" placeholder="Email" />
                         </nz-input-group>
                       </nz-form-control>
                     </nz-form-item>
