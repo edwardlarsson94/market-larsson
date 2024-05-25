@@ -6,6 +6,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../state/app.state';
 import { setHiddenLoginForm, setShowLoginForm, setUser } from '../../../state/app.actions';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import {
   AbstractControl,
@@ -14,7 +15,7 @@ import {
   NonNullableFormBuilder,
   ValidatorFn,
   Validators,
-  ReactiveFormsModule
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { Register } from '../../../models/interface/auth/register';
 import { defaultRegister } from '../../../models/default/auth/auth';
@@ -31,7 +32,8 @@ import { User } from '../../../models/interface/auth/user';
     ReactiveFormsModule,
     NzInputModule,
     NzSelectModule,
-    NzButtonModule
+    NzButtonModule,
+    NzIconModule
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
@@ -46,6 +48,8 @@ export class RegisterComponent {
     type: 'info-circle',
     theme: 'twotone'
   };
+  passwordVisible = false;
+  confirmPasswordVisible = false;
 
   submitForm(): void {
     if (this.validateForm.valid) {

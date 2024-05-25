@@ -8,19 +8,45 @@
   <nz-form-item class="box-password-register">
     <nz-form-label class="label-register-all" nzFor="password" nzRequired>Password</nz-form-label>
     <nz-form-control nzErrorTip="Please input your password!">
-      <input
-        nz-input
-        type="password"
-        id="password"
-        formControlName="password"
-        (ngModelChange)="updateConfirmValidator()"
-      />
+      <nz-input-group [nzSuffix]="passwordSuffixTemplate">
+        <input
+          [type]="passwordVisible ? 'text' : 'password'"
+          nz-input
+          id="password"
+          formControlName="password"
+          (ngModelChange)="updateConfirmValidator()"
+        />
+      </nz-input-group>
+      <ng-template #passwordSuffixTemplate>
+        <i
+          nz-icon
+          [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+          (click)="passwordVisible = !passwordVisible"
+          nzTheme="outline"
+        ></i>
+      </ng-template>
     </nz-form-control>
-  </nz-form-item >
+  </nz-form-item>
+
   <nz-form-item class="box-confirm-register">
     <nz-form-label class="label-register-all" nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>
     <nz-form-control [nzErrorTip]="errorTpl">
-      <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
+      <nz-input-group [nzSuffix]="confirmPasswordSuffixTemplate">
+        <input
+          [type]="confirmPasswordVisible ? 'text' : 'password'"
+          nz-input
+          formControlName="checkPassword"
+          id="checkPassword"
+        />
+      </nz-input-group>
+      <ng-template #confirmPasswordSuffixTemplate>
+        <i
+          nz-icon
+          [nzType]="confirmPasswordVisible ? 'eye-invisible' : 'eye'"
+          (click)="confirmPasswordVisible = !confirmPasswordVisible"
+          nzTheme="outline"
+        ></i>
+      </ng-template>
       <ng-template #errorTpl let-control>
         @if (control.errors?.['required']) {
           Please confirm your password!
