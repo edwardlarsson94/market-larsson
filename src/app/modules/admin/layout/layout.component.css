@@ -17,12 +17,6 @@
     background-image: url('../../../../assets/images/mercadona.svg');
 }
 
-.box-button-logout {
-    right: 50px;
-    position: absolute;
-    top: 0;
-}
-
 [nz-menu] {
     line-height: 64px;
 }
@@ -56,15 +50,12 @@ nz-footer {
     border-color:var(--color-button-red-cancel);
     color: var(--color-button-red-cancel);
 }
-
+.box-button-logout{
+    float: right;
+    margin-top: -4rem;
+}
 @media screen and (max-width: 768px) {
-    .box-header-layout{
-        min-width: 75rem;
-    }
-    .box-content-layout{
-        min-width: 75rem;
-    }
-    .box-button-logout{
-        left: 64rem;
+    .box-layout-content{
+        min-width: 120rem;
     }
 }

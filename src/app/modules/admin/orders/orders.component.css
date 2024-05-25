@@ -8,3 +8,6 @@
 .button-order-layout{
     color: var(--color-button-green-confirm);
 }
+.title-order-table th{
+    color: var(--color-button-green-confirm);
+}

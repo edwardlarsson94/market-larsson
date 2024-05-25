@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzFormModule } from 'ng-zorro-antd/form';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzModalModule } from 'ng-zorro-antd/modal';
@@ -26,7 +25,8 @@ import { defaultTicket } from '../../../models/default/ticket/ticket';
     CommonModule,
     NzPopconfirmModule,
     NzButtonModule,
-    NzModalModule
+    NzModalModule,
+    DatePipe
   ],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css'
@@ -37,10 +37,6 @@ export class OrdersComponent implements OnInit {
   listOfData: Ticket[] = [defaultTicket];
   isVisible = false;
   isFooter = null;
-
-  showModal(): void {
-    this.isVisible = true;
-  }
 
   handleCancel(): void {
     this.isVisible = false;

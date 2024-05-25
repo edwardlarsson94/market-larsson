@@ -28,3 +28,6 @@
     display: flex;
     justify-content: space-between;
 }
+.title-product-table th{
+    color: var(--color-button-green-confirm);
+}

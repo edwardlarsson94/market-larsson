@@ -1,11 +1,14 @@
 <nz-table #editRowTable nzBordered [nzData]="listOfData" nzTableLayout="fixed">
     <thead>
-      <tr>
-        <th nzWidth="25%" scope="col">Full Name</th>
-        <th nzWidth="25%" scope="col">Address</th>
-        <th nzWidth="15%" scope="col">Total</th>
-        <th nzWidth="15%" scope="col">Amount</th>
-        <th scope="col">Action</th>
+      <tr class="title-order-table">
+        <th nzWidth="15%" scope="col">Full Name</th>
+        <th nzWidth="20%" scope="col">Address</th>
+        <th nzWidth="20%" scope="col">Comments</th>
+        <th nzWidth="8%" scope="col">Phone</th>
+        <th nzWidth="8%" scope="col">Total</th>
+        <th nzWidth="8%" scope="col">Tax</th>
+        <th nzWidth="8%" scope="col">Amount</th>
+        <th nzWidth="13%" scope="col">Created At</th>
       </tr>
     </thead>
     <tbody>
@@ -13,9 +16,12 @@
         <ng-container>
           <td>{{ data.fullName }}</td>
           <td>{{ data.address }}</td>
+          <td>{{data.comment}}</td>
+          <td>{{ data.phoneNumberPrefix+' '+data.phoneNumber}}</td>
           <td>{{ data.total }}</td>
+          <td>{{ data.tax }}</td>
           <td>{{ data.amountProduct }}</td>
-          <td><a class="button-order-layout" (click)="showModal()">View Detail</a></td>
+          <td>{{ data.createdAt | date:'medium'}}</td>
         </ng-container>
       </tr>
     </tbody>
