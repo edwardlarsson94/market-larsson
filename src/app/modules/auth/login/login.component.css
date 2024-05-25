@@ -42,6 +42,7 @@
 .login-form-button{
     background-color: var(--color-button-green-confirm);
     border-color: var(--color-button-green-confirm);
+    margin-top: 1rem;
 }
 .text-register-now{
     color:var(--color-button-green-confirm);
@@ -69,5 +70,80 @@
     }
     .box-input-username{
         margin-top: 1rem;
+    }
+}
+
+.button-register-new, .button-login-new{
+    border-color: var(--color-button-green-confirm);
+    margin-right: 1rem;
+}
+
+.box-email-register, 
+.box-password-register, 
+.box-confirm-register,
+.box-phone-register,
+.user-name-register,
+.box-full-name{
+    display: flex;
+    flex-direction: column;
+}
+
+.box-password-register,
+.box-confirm-register,
+.box-phone-register,
+.user-name-register{
+    margin-top: 2rem;
+}
+
+.box-email-register{
+    margin-top: 0;
+}
+
+.box-email-register nz-form-label,
+.box-password-register nz-form-label,
+.box-confirm-register nz-form-label,
+.box-phone-register nz-form-label,
+.user-name-register nz-form-label,
+.box-full-name nz-form-label
+{
+    text-align: justify;
+}
+
+.box-register-button{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 1rem;
+}
+.register-form-button{
+    background-color: var(--color-button-green-confirm);
+    border-color: var(--color-button-green-confirm);
+    width: 100%;
+    margin-top: 4rem;
+}
+.register-area{
+    margin: 0;
+}
+.label-register-all{
+    margin-top: 1rem;
+}
+.text-login-now{
+    color:var(--color-button-green-confirm);
+}
+.button-login-now{
+    border: transparent;
+    background-color: transparent;
+}
+
+@media screen and (max-width: 768px) {
+    .box-email-register, 
+    .box-password-register, 
+    .box-confirm-register,
+    .user-name-register,
+    .box-full-name{
+        margin:0;
+    }
+    .register-form-button{
+        margin-top:1rem;
     }
 }

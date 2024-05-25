@@ -1,55 +1,43 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-    <!-- <nz-form-item class="box-full-name">
-      <nz-form-label nzRequired nzFor="nameRegister">Full Name</nz-form-label>
-      <nz-form-control nzErrorTip="Please input your full name!">
-        <input nz-input formControlName="nameRegister" id="nameRegister" />
-      </nz-form-control>
-    </nz-form-item> -->
-    <nz-form-item class="box-email-register">
-      <nz-form-label class="label-register-all" nzRequired nzFor="email">E-mail</nz-form-label>
-      <nz-form-control nzErrorTip="The input is not valid E-mail!">
-        <input nz-input formControlName="email" id="email" />
-      </nz-form-control>
-    </nz-form-item>
-    <!-- <nz-form-item class="user-name-register">
-      <nz-form-label class="label-register-all" nzRequired nzFor="userRegister">User Name</nz-form-label>
-      <nz-form-control nzErrorTip="Please input your user name!">
-        <input nz-input formControlName="userRegister" id="userRegister" />
-      </nz-form-control>
-    </nz-form-item> -->
-    <nz-form-item class="box-password-register">
-      <nz-form-label class="label-register-all" nzFor="password" nzRequired>Password</nz-form-label>
-      <nz-form-control nzErrorTip="Please input your password!">
-        <input
-          nz-input
-          type="password"
-          id="password"
-          formControlName="password"
-          (ngModelChange)="updateConfirmValidator()"
-        />
-      </nz-form-control>
-    </nz-form-item >
-    <nz-form-item class="box-confirm-register">
-      <nz-form-label class="label-register-all" nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>
-      <nz-form-control [nzErrorTip]="errorTpl">
-        <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
-        <ng-template #errorTpl let-control>
-          @if (control.errors?.['required']) {
-            Please confirm your password!
-          }
-          @if (control.errors?.['confirm']) {
-            Two passwords that you enter is inconsistent!
-          }
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item nz-row class="register-area">
-      <nz-form-control class="box-register-button">
-        <button nz-button class="register-form-button" [nzType]="'primary'">Register</button>
-        Or
-        <button (click)="showLoginForm()" class="button-login-now">
-          <span class="text-login-now">Login now!</span>
-        </button>
-      </nz-form-control>
-    </nz-form-item>
-  </form>
+  <nz-form-item class="box-email-register">
+    <nz-form-label class="label-register-all" nzRequired nzFor="email">E-mail</nz-form-label>
+    <nz-form-control nzErrorTip="The input is not valid E-mail!">
+      <input nz-input formControlName="email" id="email" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item class="box-password-register">
+    <nz-form-label class="label-register-all" nzFor="password" nzRequired>Password</nz-form-label>
+    <nz-form-control nzErrorTip="Please input your password!">
+      <input
+        nz-input
+        type="password"
+        id="password"
+        formControlName="password"
+        (ngModelChange)="updateConfirmValidator()"
+      />
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item class="box-confirm-register">
+    <nz-form-label class="label-register-all" nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>
+    <nz-form-control [nzErrorTip]="errorTpl">
+      <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
+      <ng-template #errorTpl let-control>
+        @if (control.errors?.['required']) {
+          Please confirm your password!
+        }
+        @if (control.errors?.['confirm']) {
+          Two passwords that you enter is inconsistent!
+        }
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item nz-row class="register-area">
+    <nz-form-control class="box-register-button">
+      <button nz-button class="register-form-button" [nzType]="'primary'">Register</button>
+      Or
+      <button (click)="showLoginForm()" class="button-login-now">
+        <span class="text-login-now">Login now!</span>
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

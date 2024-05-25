@@ -8,7 +8,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { DataLogin, Login } from '../../../models/interface/auth/login';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../state/app.state';
-import { setShowLoginForm, setUser, clearUser } from '../../../state/app.actions';
+import { setShowLoginForm, setUser, clearUser, setHiddenLoginForm } from '../../../state/app.actions';
 import { Observable } from 'rxjs';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
@@ -16,6 +16,8 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Router } from '@angular/router';
 import { User } from '../../../models/interface/auth/user';
 import { AuthPipe } from '../../../core/pipe/auth.pipe';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +31,9 @@ import { AuthPipe } from '../../../core/pipe/auth.pipe';
     AsyncPipe,
     NzNotificationModule,
     JsonPipe,
-    AuthPipe
+    AuthPipe,
+    NzInputModule,
+    NzSelectModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -41,9 +45,22 @@ export class LoginComponent {
   hiddenLoginForm$: Observable<boolean>;
   user$: Observable<User | null>;
 
+  constructor(
+    private fb: NonNullableFormBuilder, 
+    private service: AuthService,
+    private store: Store<AppState>,
+    private notification: NzNotificationService,
+    private router: Router
+  ) {
+    this.showLoginForm$ = this.store.select(state => state.showLoginForm);
+    this.hiddenLoginForm$ = this.store.select(state => state.hiddenLoginForm);
+    this.user$ = this.store.select(state => state.user);
+  }
+
   showModal(): void {
     this.isVisible = true;
     this.validateForm.reset();
+    this.store.dispatch(setShowLoginForm({ show: true }));
   }
 
   logoutUser(): void {
@@ -59,12 +76,12 @@ export class LoginComponent {
   }
 
   validateForm: FormGroup<{
-    userName: FormControl<string>;
+    email: FormControl<string>;
     password: FormControl<string>;
     remember: FormControl<boolean>;
   }> = this.fb.group({
-    userName: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email, Validators.minLength(4), Validators.maxLength(50)]],
+    password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
     remember: [true]
   });
 
@@ -74,11 +91,11 @@ export class LoginComponent {
 
   submitForm(): void {
     if (this.validateForm.valid) {
-      const userName = this.validateForm.value.userName;
+      const email = this.validateForm.value.email;
       const password = this.validateForm.value.password;
-      if (userName !== undefined && password !== undefined) {
+      if (email !== undefined && password !== undefined) {
         const loginData: Login = {
-          email: userName,
+          email: email,
           password: password
         };
         this.service.login(loginData).subscribe({
@@ -131,70 +148,52 @@ export class LoginComponent {
   }
 
   validateUser(data: string | undefined): void {
-      if (data) {
-        if (data === 'admin') {
-          this.router.navigate(['/admin/products']);
-        }
+    if (data) {
+      if (data === 'admin') {
+        this.router.navigate(['/admin/products']);
       }
+    }
   }
   
   getDataUser(data: DataLogin | undefined): void {
-      if (data?.id) {
-        this.service.getUser(data?.id).subscribe({
-          next: (response) => {
-            if(response?.data){
-              const user: User = {
-                id: response.data.id,
-                fullName: 'No Name',
-                email: response.data.email,
-                user: '',
-                password: '',
-                role: response.data.role
-              };
-              this.store.dispatch(setUser({ user }));
-              this.validateUser(user.role);
-            }
-          },
-          error: (error) => {
-            let messageError = '';
-            let codeError = '';
-            if(error?.error){
-              messageError = error?.error?.errors?.message;
-              codeError = error?.error?.errors?.code;
-            }
-            this.createNotification(
-              "error",
-              "Oops! Something Went Wrong",
-              `Uh-oh! It seems like there was an issue during login. ${messageError}. ${codeError}`
-            )
+    if (data?.id) {
+      this.service.getUser(data?.id).subscribe({
+        next: (response) => {
+          if(response?.data){
+            const user: User = {
+              id: response.data.id,
+              fullName: 'No Name',
+              email: response.data.email,
+              user: '',
+              password: '',
+              role: response.data.role
+            };
+            this.store.dispatch(setUser({ user }));
+            this.validateUser(user.role);
           }
-        });
-      }
+        },
+        error: (error) => {
+          let messageError = '';
+          let codeError = '';
+          if(error?.error){
+            messageError = error?.error?.errors?.message;
+            codeError = error?.error?.errors?.code;
+          }
+          this.createNotification(
+            "error",
+            "Oops! Something Went Wrong",
+            `Uh-oh! It seems like there was an issue during login. ${messageError}. ${codeError}`
+          )
+        }
+      });
+    }
   }
 
-  createNotification(type: string,title:string,description:string): void {
+  createNotification(type: string, title: string, description: string): void {
     this.notification.create(
       type,
       title,
       description
     );
-  }
-
-  constructor(
-    private fb: NonNullableFormBuilder, 
-    private service: AuthService,
-    private store: Store<AppState>,
-    private notification: NzNotificationService,
-    private router: Router
-  ) {
-    this.showLoginForm$ = this.store.select(state => state.showLoginForm);
-    this.hiddenLoginForm$ = this.store.select(state => state.hiddenLoginForm);
-    this.user$ = this.store.select(state => state.user);
-
-    this.hiddenLoginForm$.subscribe(hidden => {
-      if (hidden) {
-        this.isVisible = false;
-      }
-    });
   }
 }

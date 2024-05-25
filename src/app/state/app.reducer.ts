@@ -4,20 +4,19 @@ import { Product } from '../models/interface/product/product';
 import { User } from '../models/interface/auth/user';
 import { defaultRegister } from '../models/default/auth/auth';
 
-export const initialState: boolean = true;
+export const initialShowLoginFormState: boolean = true;
+export const initialHiddenLoginFormState: boolean = false;
 export const initialCartState: Product[] = [];
 export const initialUserState: User = defaultRegister;
 
-const _authReducer = createReducer(
-  initialState,
-  on(setShowLoginForm, (state, { show }) => {
-    console.log('1',show);
-    return show
-  }),
-  on(setHiddenLoginForm, (state, { show }) => {
-    console.log('2',show);
-    return show
-  })
+const _showLoginFormReducer = createReducer(
+  initialShowLoginFormState,
+  on(setShowLoginForm, (state, { show }) => show)
+);
+
+const _hiddenLoginFormReducer = createReducer(
+  initialHiddenLoginFormState,
+  on(setHiddenLoginForm, (state, { show }) => show)
 );
 
 const _cartReducer = createReducer(
@@ -51,12 +50,16 @@ const _userReducer = createReducer(
   on(clearUser, () => initialUserState)
 );
 
-export function cartReducer(state: any, action: any) {
-  return _cartReducer(state, action);
+export function showLoginFormReducer(state: any, action: any) {
+  return _showLoginFormReducer(state, action);
 }
 
-export function authReducer(state: any, action: any) {
-  return _authReducer(state, action);
+export function hiddenLoginFormReducer(state: any, action: any) {
+  return _hiddenLoginFormReducer(state, action);
+}
+
+export function cartReducer(state: any, action: any) {
+  return _cartReducer(state, action);
 }
 
 export function userReducer(state: any, action: any) {

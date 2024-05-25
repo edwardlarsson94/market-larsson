@@ -86,7 +86,8 @@ export class RegisterComponent {
                 "error",
                 "Oops! Something Went Wrong",
                 `Uh-oh! It seems like there was an issue during Register. ${messageError}. ${codeError}`
-              )            }
+              )
+            }
           });
         },
         error: (error) => {
@@ -183,9 +184,9 @@ export class RegisterComponent {
     private notification: NzNotificationService,
   ) {
     this.validateForm = this.fb.group({
-      email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.required]],
-      checkPassword: ['', [Validators.required, this.confirmationValidator]],
+      email: ['', [Validators.email, Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+      checkPassword: ['', [Validators.required, this.confirmationValidator, Validators.minLength(6), Validators.maxLength(20)]],
     });
   }
 }

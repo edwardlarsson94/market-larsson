@@ -1,17 +1,17 @@
 @if(user$ | async; as user){
-  @if(user.email){
+  @if(user?.email){
     <div class="box-logout-name">
       @if(user.fullName === 'No Name'){
-        <h3 class="title-name-user">{{ user.email | auth  }}</h3>
+        <h3 class="title-name-user">{{ user?.email ?? '' | auth  }}</h3>
       }@else {
         <h3 class="title-name-user">{{ user.fullName }}</h3>
       }
       <button class="button-logout-logout" nz-button [nzType]="'primary'" (click)="logoutUser()">Logout</button>
     </div>
   }@else if(showLoginForm$ | async){
-    <button nz-button (click)="showModal()" nzType="text"><span>Login</span></button>
+    <button nz-button (click)="showModal()" class="button-login-new" nzType="text"><span>Login</span></button>
   }@else {
-    <button nz-button (click)="showModal()" nzType="text"><span>Register</span></button>
+    <button nz-button (click)="showModal()" class="button-register-new" nzType="text"><span>Register</span></button>
   }
 }
 <nz-modal nzClassName="title-modal-login" 
@@ -36,21 +36,24 @@
                   />
                 </div>
                 @if(showLoginForm$ | async){
-                  <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
-                    <nz-form-item class="box-input-username">
-                      <nz-form-control nzErrorTip="Please input your username!">
-                        <nz-input-group nzPrefixIcon="user">
-                          <input class="input-login-form" type="text" nz-input formControlName="userName" placeholder="Email" />
-                        </nz-input-group>
+                  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+                    <nz-form-item class="box-email-register">
+                      <nz-form-label class="label-register-all" nzRequired nzFor="email">E-mail</nz-form-label>
+                      <nz-form-control nzErrorTip="The input is not valid E-mail!">
+                        <input nz-input formControlName="email" id="email" />
                       </nz-form-control>
                     </nz-form-item>
-                    <nz-form-item>
-                      <nz-form-control nzErrorTip="Please input your Password!">
-                        <nz-input-group nzPrefixIcon="lock">
-                          <input class="input-login-form" type="password" nz-input formControlName="password" placeholder="Password" />
-                        </nz-input-group>
+                    <nz-form-item class="box-password-register">
+                      <nz-form-label class="label-register-all" nzFor="password" nzRequired>Password</nz-form-label>
+                      <nz-form-control nzErrorTip="Please input your password!">
+                        <input
+                          nz-input
+                          type="password"
+                          id="password"
+                          formControlName="password"
+                        />
                       </nz-form-control>
-                    </nz-form-item>
+                    </nz-form-item >
                     <div class="box-footer-login">
                       <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
                       Or
