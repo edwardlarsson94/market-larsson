@@ -13,15 +13,15 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(dataLogin: Login): Observable<LoginResults> {
-    return this.http.post<LoginResults>('http://localhost:3000/api/auth/login',dataLogin);
+    return this.http.post<LoginResults>('https://market-larsson-api.azurewebsites.net/auth/login',dataLogin);
   }
 
   register(dataRegister: Register): Observable<RegisterResults> {
-    return this.http.post<RegisterResults>('http://localhost:3000/api/users',dataRegister);
+    return this.http.post<RegisterResults>('https://market-larsson-api.azurewebsites.net/users',dataRegister);
   }
 
   getUser(id:string): Observable<UserResults>{
-    return this.http.get<UserResults>('http://localhost:3000/api/users/'+id);
+    return this.http.get<UserResults>('https://market-larsson-api.azurewebsites.net/users/'+id);
   }
   
 }  
