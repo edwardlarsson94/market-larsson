@@ -5,7 +5,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../state/app.state';
-import { setShowLoginForm } from '../../../state/app.actions';
+import { setHiddenLoginForm, setShowLoginForm, setUser } from '../../../state/app.actions';
 
 import {
   AbstractControl,
@@ -20,6 +20,8 @@ import { Register } from '../../../models/interface/auth/register';
 import { defaultRegister } from '../../../models/default/auth/auth';
 import { AuthService } from '../../../services/auth/auth.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { DataLogin, Login } from '../../../models/interface/auth/login';
+import { User } from '../../../models/interface/auth/user';
 
 @Component({
   selector: 'app-register',
@@ -36,9 +38,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 })
 export class RegisterComponent {
   validateForm: FormGroup<{
-    // nameRegister: FormControl<string>;
     email: FormControl<string>;
-    // userRegister: FormControl<string>;
     password: FormControl<string>;
     checkPassword: FormControl<string>;
   }>;
@@ -63,20 +63,45 @@ export class RegisterComponent {
             "success",
             "Welcome to the Community!",
             "Congratulations on joining us! 🎉 Your registration is complete. Get ready to dive into a world of possibilities. Let's start exploring together!"
-          )
+          );
+          const loginData: Login = {
+            email: registerData.email,
+            password: registerData.password
+          };
+          this.service.login(loginData).subscribe({
+            next: (response) => {
+              if (response) {
+                this.getDataUser(response?.data);
+                this.store.dispatch(setHiddenLoginForm({ show: false }));
+              }
+            },
+            error: (error) => {
+              let messageError = '';
+              let codeError = '';
+              if(error?.error){
+                messageError = error?.error?.errors?.message;
+                codeError = error?.error?.errors?.code;
+              }
+              this.createNotification(
+                "error",
+                "Oops! Something Went Wrong",
+                `Uh-oh! It seems like there was an issue during Register. ${messageError}. ${codeError}`
+              )            }
+          });
         },
         error: (error) => {
           let messageError = '';
           let codeError = '';
-          if(error && error?.error){
+          if(error?.error){
             messageError = error?.error?.errors?.message;
             codeError = error?.error?.errors?.code;
           }
           this.createNotification(
             "error",
-            "Oops! Something Went Wrong",
-            `Uh-oh! It seems like there was an issue during login. ${messageError}. ${codeError}`
-          )        }
+            "Oops!! Something Went Wrong",
+            `Uh-oh! It seems like there was an issue during Register. ${messageError}. ${codeError}`
+          )
+        }
       });
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
@@ -90,10 +115,43 @@ export class RegisterComponent {
 
   showLoginForm(): void {
     this.store.dispatch(setShowLoginForm({ show: true }));
+    this.store.dispatch(setHiddenLoginForm({ show: false }));
+  }
+
+  getDataUser(data: DataLogin | undefined): void {
+    if (data?.id) {
+      this.service.getUser(data?.id).subscribe({
+        next: (response) => {
+          if(response?.data){
+            const user: User = {
+              id: response.data.id,
+              fullName: 'No Name',
+              email: response.data.email,
+              user: '',
+              password: '',
+              role: response.data.role
+            };
+            this.store.dispatch(setUser({ user }));
+          }
+        },
+        error: (error) => {
+          let messageError = '';
+          let codeError = '';
+          if(error?.error){
+            messageError = error?.error?.errors?.message;
+            codeError = error?.error?.errors?.code;
+          }
+          this.createNotification(
+            "error",
+            "Oops! Something Went Wrong",
+            `Uh-oh! It seems like there was an issue during login. ${messageError}. ${codeError}`
+          )
+        }
+      });
+    }
   }
 
   updateConfirmValidator(): void {
-    /** wait for refresh value */
     Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
   }
 
@@ -110,7 +168,7 @@ export class RegisterComponent {
     e.preventDefault();
   }
 
-  createNotification(type: string,title:string,description:string): void {
+  createNotification(type: string, title: string, description: string): void {
     this.notification.create(
       type,
       title,
@@ -122,12 +180,10 @@ export class RegisterComponent {
     private fb: NonNullableFormBuilder,
     private store: Store<AppState>,
     private service: AuthService,
-    private notification: NzNotificationService
+    private notification: NzNotificationService,
   ) {
     this.validateForm = this.fb.group({
-      // nameRegister: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
-      // userRegister: ['', [Validators.required]],
       password: ['', [Validators.required]],
       checkPassword: ['', [Validators.required, this.confirmationValidator]],
     });

@@ -38,6 +38,7 @@ export class LoginComponent {
   isVisible = false;
   modalFooter = null;
   showLoginForm$: Observable<boolean>;
+  hiddenLoginForm$: Observable<boolean>;
   user$: Observable<User | null>;
 
   showModal(): void {
@@ -187,6 +188,13 @@ export class LoginComponent {
     private router: Router
   ) {
     this.showLoginForm$ = this.store.select(state => state.showLoginForm);
+    this.hiddenLoginForm$ = this.store.select(state => state.hiddenLoginForm);
     this.user$ = this.store.select(state => state.user);
+
+    this.hiddenLoginForm$.subscribe(hidden => {
+      if (hidden) {
+        this.isVisible = false;
+      }
+    });
   }
 }

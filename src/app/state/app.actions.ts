@@ -7,6 +7,11 @@ export const setShowLoginForm = createAction(
   props<{ show: boolean }>()
 );
 
+export const setHiddenLoginForm = createAction(
+  '[Auth] Set Hidden Login Form',
+  props<{ show: boolean }>()
+);
+
 export const addToCart = createAction(
   '[Cart] Add To Cart',
   props<{ product: Product }>()

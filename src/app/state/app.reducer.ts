@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { setShowLoginForm, setUser, clearUser, addToCart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart } from './app.actions';
+import { setShowLoginForm, setUser, clearUser, addToCart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart, setHiddenLoginForm } from './app.actions';
 import { Product } from '../models/interface/product/product';
 import { User } from '../models/interface/auth/user';
 import { defaultRegister } from '../models/default/auth/auth';
@@ -10,7 +10,14 @@ export const initialUserState: User = defaultRegister;
 
 const _authReducer = createReducer(
   initialState,
-  on(setShowLoginForm, (state, { show }) => show)
+  on(setShowLoginForm, (state, { show }) => {
+    console.log('1',show);
+    return show
+  }),
+  on(setHiddenLoginForm, (state, { show }) => {
+    console.log('2',show);
+    return show
+  })
 );
 
 const _cartReducer = createReducer(

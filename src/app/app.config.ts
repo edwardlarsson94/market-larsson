@@ -11,6 +11,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimations(),
     provideHttpClient(withFetch()),
-    provideStore({ showLoginForm: authReducer, productsInCart: cartReducer, user: userReducer })
+    provideStore({ showLoginForm: authReducer, hiddenLoginForm: authReducer, productsInCart: cartReducer, user: userReducer })
   ]
 };
