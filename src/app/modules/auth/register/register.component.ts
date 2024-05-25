@@ -70,8 +70,9 @@ export class RegisterComponent {
           };
           this.service.login(loginData).subscribe({
             next: (response) => {
-              if (response) {
+              if (response.status) {
                 this.getDataUser(response?.data);
+                this.store.dispatch(setHiddenLoginForm({ show: true }));
                 this.store.dispatch(setHiddenLoginForm({ show: false }));
               }
             },

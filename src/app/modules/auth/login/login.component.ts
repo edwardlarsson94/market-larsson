@@ -55,6 +55,12 @@ export class LoginComponent {
     this.showLoginForm$ = this.store.select(state => state.showLoginForm);
     this.hiddenLoginForm$ = this.store.select(state => state.hiddenLoginForm);
     this.user$ = this.store.select(state => state.user);
+
+    this.hiddenLoginForm$.subscribe(hidden => {
+      if (!hidden) {
+        this.isVisible = false;
+      }
+    });
   }
 
   showModal(): void {
