@@ -38,22 +38,34 @@
                 @if(showLoginForm$ | async){
                   <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
                     <nz-form-item class="box-email-register">
-                      <nz-form-label class="label-register-all" nzRequired nzFor="email">E-mail</nz-form-label>
+                      <nz-form-label class="label-register-all" nzFor="email" nzRequired>E-mail</nz-form-label>
                       <nz-form-control nzErrorTip="The input is not valid E-mail!">
                         <input nz-input formControlName="email" id="email" />
                       </nz-form-control>
                     </nz-form-item>
+                  
                     <nz-form-item class="box-password-register">
                       <nz-form-label class="label-register-all" nzFor="password" nzRequired>Password</nz-form-label>
                       <nz-form-control nzErrorTip="Please input your password!">
-                        <input
+                        <nz-input-group [nzSuffix]="suffixTemplate">
+                          <input
                           nz-input
-                          type="password"
-                          id="password"
-                          formControlName="password"
-                        />
+                            [type]="passwordVisible ? 'text' : 'password'"
+                            
+                            formControlName="password"
+                          />
+                        </nz-input-group>
+                        <ng-template #suffixTemplate>
+                          <i
+                            nz-icon
+                            [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                            (click)="passwordVisible = !passwordVisible"
+                            nzTheme="outline"
+                          ></i>
+                        </ng-template>
                       </nz-form-control>
-                    </nz-form-item >
+                    </nz-form-item>
+                  
                     <div class="box-footer-login">
                       <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
                       Or

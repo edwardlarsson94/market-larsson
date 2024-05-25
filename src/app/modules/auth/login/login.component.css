@@ -134,7 +134,9 @@
     border: transparent;
     background-color: transparent;
 }
-
+.i{
+    cursor: pointer;
+}
 @media screen and (max-width: 768px) {
     .box-email-register, 
     .box-password-register, 

@@ -8,16 +8,16 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { DataLogin, Login } from '../../../models/interface/auth/login';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../state/app.state';
-import { setShowLoginForm, setUser, clearUser, setHiddenLoginForm } from '../../../state/app.actions';
+import { setShowLoginForm, setUser, clearUser } from '../../../state/app.actions';
 import { Observable } from 'rxjs';
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { NzNotificationModule } from 'ng-zorro-antd/notification';
-import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NzNotificationService, NzNotificationModule } from 'ng-zorro-antd/notification';
 import { Router } from '@angular/router';
 import { User } from '../../../models/interface/auth/user';
 import { AuthPipe } from '../../../core/pipe/auth.pipe';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-login',
@@ -34,6 +34,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     AuthPipe,
     NzInputModule,
     NzSelectModule,
+    NzIconModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -44,6 +45,7 @@ export class LoginComponent {
   showLoginForm$: Observable<boolean>;
   hiddenLoginForm$: Observable<boolean>;
   user$: Observable<User | null>;
+  passwordVisible = false;
 
   constructor(
     private fb: NonNullableFormBuilder, 
