@@ -2,41 +2,41 @@
   <div class="logo-search-and-category">
     <div class="logo">
     </div>
-      <div class="search-bar">
-        <nz-input-group class="search-bar-input" nzSize="large" [nzSuffix]="suffixIcon">
-          <input
-            placeholder="Search products"
-            nz-input
-            [(ngModel)]="inputValue"
-            (ngModelChange)="onChange($event)"
-            [nzAutocomplete]="auto"
-          />
-        </nz-input-group>
-        <ng-template #suffixIcon>
-          <span nz-icon nzType="search"></span>
-        </ng-template>
-        <nz-autocomplete #auto>
-          @for (group of optionGroups; track group.title) {
-            <nz-auto-optgroup [nzLabel]="groupTitle">
-              <ng-template #groupTitle>
-                <span>
-                  {{ group.title }}
-                  <a class="more-link" href="https://www.google.com/search?q=ng+zorro" target="_blank">更多</a>
-                </span>
-              </ng-template>
-              @for (option of group.children; track option.title) {
-                <nz-auto-option [nzLabel]="option.title" [nzValue]="option.title">
-                  {{ option.title }}
-                  <span class="certain-search-item-count">{{ option.count }} 人 关注</span>
-                </nz-auto-option>
-              }
-            </nz-auto-optgroup>
-          }
-        </nz-autocomplete>
-      </div>
-    <!-- <div class="category-button">
-      <button nz-button nzType="text">Admin</button>
+    <!-- <div class="search-bar">
+      <nz-input-group class="search-bar-input" nzSize="large" [nzSuffix]="suffixIcon">
+        <input
+          placeholder="Search products"
+          nz-input
+          [(ngModel)]="inputValue"
+          (ngModelChange)="onChange($event)"
+          [nzAutocomplete]="auto"
+        />
+      </nz-input-group>
+      <ng-template #suffixIcon>
+        <span nz-icon nzType="search"></span>
+      </ng-template>
+      <nz-autocomplete #auto>
+        @for (group of optionGroups; track group.title) {
+          <nz-auto-optgroup [nzLabel]="groupTitle">
+            <ng-template #groupTitle>
+              <span>
+                {{ group.title }}
+                <a class="more-link" href="https://www.google.com/search?q=ng+zorro" target="_blank">更多</a>
+              </span>
+            </ng-template>
+            @for (option of group.children; track option.title) {
+              <nz-auto-option [nzLabel]="option.title" [nzValue]="option.title">
+                {{ option.title }}
+                <span class="certain-search-item-count">{{ option.count }} 人 关注</span>
+              </nz-auto-option>
+            }
+          </nz-auto-optgroup>
+        }
+      </nz-autocomplete>
     </div> -->
+  <div class="box-recipe-button">
+    <button class="recipe-button" nz-button nzType="text">Recipe</button>
+  </div>
   </div>
   <div class="login-and-cart">
     <div class="login-button">

@@ -49,6 +49,11 @@ nz-footer {
     background-color: transparent;
     border-color:var(--color-button-red-cancel);
     color: var(--color-button-red-cancel);
+    border-radius: 10px;
+}
+.button-logout-layout:focus, .button-logout-layout:hover{
+    background-color:var(--color-button-red-cancel);
+    color: var(--color-background);
 }
 .box-button-logout{
     float: right;

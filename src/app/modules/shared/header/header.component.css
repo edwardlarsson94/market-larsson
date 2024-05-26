@@ -25,9 +25,19 @@
   border-radius: 1rem;
 }
 
-.category-button,
+.box-recipe-button,
 .login-button {
   margin-left: 20px;
+}
+
+.recipe-button, .recipe-button:active, .recipe-button:hover, .recipe-button:focus{
+  border-color: var(--color-button-add-border);
+  border-radius: 10px;
+}
+
+.recipe-button:focus, .recipe-button:hover{
+  background-color: var(--color-button-add-border);
+  color: var(--color-background);
 }
 
 .logo-search-and-category {
