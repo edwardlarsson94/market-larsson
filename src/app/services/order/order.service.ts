@@ -11,10 +11,10 @@ export class OrderService {
   constructor(private http: HttpClient) { }
 
   getOrdersList(): Observable<TicketResults>{
-    return this.http.get<TicketResults>('https://market-larsson-api.azurewebsites.net/api/order');
+    return this.http.get<TicketResults>('https://market-larsson-backend.azurewebsites.net/api/order');
   }
   
   createOrder(ticket: Ticket): Observable<Ticket> {
-    return this.http.post<Ticket>('https://market-larsson-api.azurewebsites.net/api/order', ticket);
+    return this.http.post<Ticket>('https://market-larsson-backend.azurewebsites.net/api/order', ticket);
   }
 }
