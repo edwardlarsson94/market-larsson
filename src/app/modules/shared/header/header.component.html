@@ -35,7 +35,7 @@
       </nz-autocomplete>
     </div> -->
   <div class="box-recipe-button">
-    <button class="recipe-button" nz-button nzType="text">Recipe</button>
+    <button class="recipe-button" (click)="openRecipe()" nz-button nzType="text">Recipe</button>
   </div>
   </div>
   <div class="login-and-cart">
@@ -47,3 +47,16 @@
     </div>
   </div>
 </header>
+
+<nz-modal [(nzVisible)]="isVisible"
+  nzClassName="title-modal-recipes"  
+  nzTitle="Suggested food recipes" 
+  (nzOnCancel)="handleCancel()"
+  [nzFooter]="isFooter"
+>
+  <ng-container *nzModalContent>
+    <p>Content one</p>
+    <p>Content two</p>
+    <p>Content three</p>
+  </ng-container>
+</nz-modal>

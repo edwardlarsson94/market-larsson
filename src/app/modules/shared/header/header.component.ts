@@ -6,7 +6,7 @@ import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { LoginComponent } from '../../auth/login/login.component';
 import { DrawerComponent } from '../../cart/drawer/drawer.component';
-
+import { NzModalModule } from 'ng-zorro-antd/modal';
 export interface AutocompleteOptionGroups {
   title: string;
   count?: number;
@@ -24,7 +24,8 @@ export interface AutocompleteOptionGroups {
     NzIconModule,
     NzInputModule,
     LoginComponent,
-    DrawerComponent
+    DrawerComponent,
+    NzModalModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
@@ -32,6 +33,8 @@ export interface AutocompleteOptionGroups {
 export class HeaderComponent {
   inputValue?: string;
   optionGroups: AutocompleteOptionGroups[] = [];
+  isVisible:boolean = false;
+  isFooter:any = null;
 
   onChange(value: string): void {
     console.log(value);
@@ -77,6 +80,14 @@ export class HeaderComponent {
         }
       ];
     }, 1000);
+  }
+
+  openRecipe(): void {
+    this.isVisible = true;
+  }
+
+  handleCancel(): void {
+    this.isVisible = false;
   }
 
   constructor() {}

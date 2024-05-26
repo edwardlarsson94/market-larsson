@@ -1,3 +1,9 @@
+.title-modal-recipes .ant-modal-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-button-green-confirm)
+}
+
 .header {
   display: flex;
   justify-content: space-between;
