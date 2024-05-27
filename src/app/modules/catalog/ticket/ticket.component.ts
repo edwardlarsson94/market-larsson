@@ -86,12 +86,12 @@ export class TicketComponent {
   submitForm(): void {
     if (this.validateForm.valid) {      
       this.totalPrice$.subscribe(totalPrice => {
-        this.formData.amountProduct = totalPrice;
+        this.formData.total = totalPrice;
         this.formData.tax = totalPrice * 0.08;
       }).unsubscribe();
       
       this.totalItems$.subscribe(totalItems => {
-        this.formData.total = totalItems;
+        this.formData.amountProduct = totalItems;
       }).unsubscribe();
       this.formData.fullName = this.validateForm.value.fullName ?? 'No Name';
       this.formData.address = this.validateForm.value.address ?? '';
