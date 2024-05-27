@@ -14,7 +14,7 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
 import { NzNotificationService, NzNotificationModule } from 'ng-zorro-antd/notification';
 import { Router } from '@angular/router';
 import { User } from '../../../models/interface/auth/user';
-import { AuthPipe } from '../../../core/pipe/auth.pipe';
+import { AuthPipe } from '../../../core/pipe/auth/auth.pipe';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzIconModule } from 'ng-zorro-antd/icon';

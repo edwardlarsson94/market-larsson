@@ -1,4 +1,4 @@
-import { AuthPipe } from './auth.pipe';
+import { AuthPipe } from '../auth/auth.pipe';
 
 describe('AuthPipe', () => {
   it('create an instance', () => {

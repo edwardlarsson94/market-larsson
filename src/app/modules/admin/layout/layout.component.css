@@ -14,7 +14,6 @@
     height: 31px;
     margin: 16px 24px 16px 0;
     float: left;
-    background-image: url('../../../../assets/images/mercadona.svg');
 }
 
 [nz-menu] {
@@ -58,6 +57,18 @@ nz-footer {
 .box-button-logout{
     float: right;
     margin-top: -4rem;
+}
+.logo-layout-market{
+    width: 32px;
+    height: 32px;
+    background-image: url('../../../../assets/images/banner/logo.svg');
+    background-size: cover;
+}
+.text-layout-market{
+    margin-top: -48px;
+    color: var(--color-button-green-confirm);
+    margin-left: 35px;
+    font-weight: 900;
 }
 @media screen and (max-width: 768px) {
     .box-layout-content{

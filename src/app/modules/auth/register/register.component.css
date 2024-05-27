@@ -67,3 +67,12 @@
         margin-top:1rem;
     }
 }
+
+@media screen and (min-width: 576px) {
+    .label-register-all{
+        margin-top: 2rem;
+    }
+    .register-form-button{
+        margin-top:4rem;
+    }
+}

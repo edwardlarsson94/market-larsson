@@ -16,7 +16,19 @@
   min-width: 211px;
   height: 30px;
   top: 5px;
-  background-image: url('../../../../assets/images/mercadona.svg');
+  display: flex;
+}
+.logo-header-market{
+  width: 32px;
+  height: 32px;
+  background-image: url('../../../../assets/images/banner/logo.svg');
+  background-size: cover;
+}
+
+.text-market-larsson{
+  color: var(--color-button-green-confirm);
+  margin-left: 4px;
+  font-weight: 900;
 }
 
 .search-bar {
@@ -62,16 +74,31 @@
 }
 
 @media screen and (max-width: 768px) {
-  .search-bar {
-    display: none;
-  }
   .logo {
-    min-width: 58px;
+    min-width: 32px;
   }
-  .search-bar{
-    padding: 0;
+  .text-market-larsson{
+    display: none;
   }
   .logo-search-and-category {
     width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .cdk-overlay-container .title-modal-recipes{
+      min-width: 700px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .cdk-overlay-container .title-modal-recipes{
+      min-width: 900px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .cdk-overlay-container .title-modal-recipes{
+    min-width: 1100px;
   }
 }

@@ -1,0 +1,30 @@
+<div class="box-card-recipe">
+    <nz-card  *ngIf="recipe" nzHoverable class="box-container-recipe" [nzCover]="coverTemplate">
+        <nz-card-meta [nzTitle]="recipe.strMeal" [nzDescription]="recipe.strCategory">
+        </nz-card-meta>
+        <p class="box-list-instructions">{{ recipe.strInstructions }}</p>
+        <ul>
+          <li>
+            {{ recipe.strIngredient1 }}: {{ recipe.strMeasure1 }}
+          </li>
+          <li>
+            {{ recipe.strIngredient2 }}: {{ recipe.strMeasure2 }}
+          </li>
+          <li>
+            {{ recipe.strIngredient3 }}: {{ recipe.strMeasure3 }}
+          </li>
+          <li>
+            {{ recipe.strIngredient4 }}: {{ recipe.strMeasure4 }}
+          </li>
+          <li>
+            {{ recipe.strIngredient5 }}: {{ recipe.strMeasure5 }}
+          </li>
+          <li>
+            {{ recipe.strIngredient6 }}: {{ recipe.strMeasure6 }}
+          </li>
+        </ul>
+    </nz-card>
+    <ng-template #coverTemplate>
+        <img class="img-recipe" [src]="recipe.strMealThumb" [alt]="recipe.strMeal" />
+    </ng-template>
+</div>

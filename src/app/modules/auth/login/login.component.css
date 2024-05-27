@@ -13,6 +13,17 @@
     width: 250px;
     height: 415px;
 }
+.text-login-market{
+    color: var(--color-button-green-confirm);
+    margin-left: 4px;
+    font-weight: 900;
+}
+.logo-login-market{
+    width: 32px;
+    height: 32px;
+    background-image: url('../../../../assets/images/banner/logo.svg');
+    background-size: cover;
+}
 .box-logout-name{
     width: 100%;
     padding-right: 1rem;
@@ -41,6 +52,7 @@
 }
 .box-img-logo{
     padding-bottom: 1rem;
+    display: flex;
 }
 .box-img-logo img{
     width: 140px;
@@ -161,5 +173,13 @@
     }
     .register-form-button{
         margin-top:1rem;
+    }
+}
+@media screen and (min-width: 576px) {
+    .label-register-all{
+        margin-top: 2rem;
+    }
+    .register-form-button{
+        margin-top:4rem;
     }
 }

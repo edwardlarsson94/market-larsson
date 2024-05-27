@@ -1,0 +1,42 @@
+.box-card-recipe{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.img-recipe{
+    margin-bottom: 1rem;
+}
+.box-list-instructions{
+    margin-top: 1rem;
+}
+
+.box-container-recipe{
+    width: 460px;
+}
+
+@media screen and (min-width: 768px) {
+    .box-container-recipe{
+        width: 640px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .box-container-recipe{
+        width: 840px;
+    }
+    .img-recipe{
+        height: 450px;
+        object-fit: cover;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .box-container-recipe{
+        width: 1035px;
+    }
+    .img-recipe{
+        height: 500px;
+        object-fit: cover;
+    }
+}

@@ -7,6 +7,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { LoginComponent } from '../../auth/login/login.component';
 import { DrawerComponent } from '../../cart/drawer/drawer.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { RecipeComponent } from '../../recipe/recipe.component';
 export interface AutocompleteOptionGroups {
   title: string;
   count?: number;
@@ -25,7 +26,8 @@ export interface AutocompleteOptionGroups {
     NzInputModule,
     LoginComponent,
     DrawerComponent,
-    NzModalModule
+    NzModalModule,
+    RecipeComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
